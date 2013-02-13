@@ -129,6 +129,7 @@ namespace XFILE
 
     protected:
       CReadState*     m_state;
+      CReadState*     m_oldState;
       unsigned int    m_bufferSize;
 
       CStdString      m_url;

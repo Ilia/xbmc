@@ -320,6 +320,7 @@ CCurlFile::~CCurlFile()
 {
   Close();
   delete m_state;
+  delete m_oldState;
   g_curlInterface.Unload();
 }
 
@@ -345,6 +346,7 @@ CCurlFile::CCurlFile()
   m_password = "";
   m_httpauth = "";
   m_state = new CReadState();
+  m_oldState = NULL;
   m_skipshout = false;
   m_httpresponse = -1;
 }
@@ -358,6 +360,8 @@ void CCurlFile::SetBufferSize(unsigned int size)
 void CCurlFile::Close()
 {
   m_state->Disconnect();
+  delete m_oldState;
+  m_oldState = NULL;
 
   m_url.Empty();
   m_referer.Empty();
@@ -1031,6 +1035,14 @@ int64_t CCurlFile::Seek(int64_t iFilePosition, int iWhence)
   if(m_state->Seek(nextPos))
     return nextPos;
 
+  if (m_oldState && m_oldState->Seek(nextPos))
+  {
+    CReadState *tmp = m_state;
+    m_state = m_oldState;
+    m_oldState = tmp;
+    return nextPos;
+  }
+
   if(!m_seekable)
     return -1;
 
@@ -1038,13 +1050,13 @@ int64_t CCurlFile::Seek(int64_t iFilePosition, int iWhence)
   if(m_multisession)
   {
     CURL url(m_url);
-    oldstate = m_state;
+    oldstate = m_oldState;
+    m_oldState = m_state;
     m_state = new CReadState();
 
     g_curlInterface.easy_aquire(url.GetProtocol(), url.GetHostName(), &m_state->m_easyHandle, &m_state->m_multiHandle );
 
-    // setup common curl options
-    SetCommonOptions(m_state);
+    m_state->m_fileSize = m_oldState->m_fileSize;
   }
   else
     m_state->Disconnect();
@@ -1061,10 +1073,11 @@ int64_t CCurlFile::Seek(int64_t iFilePosition, int iWhence)
   if(response < 0 && (m_state->m_fileSize == 0 || m_state->m_fileSize != m_state->m_filePos))
   {
     m_seekable = false;
-    if(oldstate)
+    if(m_multisession && m_oldState)
     {
       delete m_state;
-      m_state = oldstate;
+      m_state = m_oldState;
+      m_oldState = oldstate;
     }
     return -1;
   }
