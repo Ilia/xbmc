@@ -28,6 +28,8 @@
 #include "threads/CriticalSection.h"
 #include "threads/SystemClock.h"
 
+#include <map>
+
 class CURL;
 class CDVDDemuxFFmpeg;
 
@@ -127,8 +129,7 @@ protected:
   void UpdateCurrentPTS();
 
   CCriticalSection m_critSection;
-  #define MAX_STREAMS 100
-  CDemuxStream* m_streams[MAX_STREAMS]; // maximum number of streams that ffmpeg can handle
+  std::map<int, CDemuxStream*> m_streams;
 
   AVIOContext* m_ioContext;
 
