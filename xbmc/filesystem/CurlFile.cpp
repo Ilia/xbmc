@@ -199,6 +199,8 @@ CCurlFile::CReadState::CReadState()
   m_bFirstLoop = true;
   m_sendRange = true;
   m_headerdone = false;
+  m_curlHeaderList = NULL;
+  m_curlAliasList = NULL;
 }
 
 CCurlFile::CReadState::~CReadState()
@@ -313,6 +315,15 @@ void CCurlFile::CReadState::Disconnect()
   m_filePos = 0;
   m_fileSize = 0;
   m_bufferSize = 0;
+
+  /* cleanup */
+  if( m_curlHeaderList )
+    g_curlInterface.slist_free_all(m_curlHeaderList);
+  m_curlHeaderList = NULL;
+
+  if( m_curlAliasList )
+    g_curlInterface.slist_free_all(m_curlAliasList);
+  m_curlAliasList = NULL;
 }
 
 
@@ -327,8 +338,6 @@ CCurlFile::~CCurlFile()
 CCurlFile::CCurlFile()
 {
   g_curlInterface.Load(); // loads the curl dll and resolves exports etc.
-  m_curlAliasList = NULL;
-  m_curlHeaderList = NULL;
   m_opened = false;
   m_multisession  = true;
   m_seekable = true;
@@ -367,14 +376,6 @@ void CCurlFile::Close()
   m_referer.Empty();
   m_cookie.Empty();
 
-  /* cleanup */
-  if( m_curlAliasList )
-    g_curlInterface.slist_free_all(m_curlAliasList);
-  if( m_curlHeaderList )
-    g_curlInterface.slist_free_all(m_curlHeaderList);
-
-  m_curlAliasList = NULL;
-  m_curlHeaderList = NULL;
   m_opened = false;
 }
 
@@ -437,11 +438,11 @@ void CCurlFile::SetCommonOptions(CReadState* state)
   g_curlInterface.easy_setopt(h, CURLOPT_FAILONERROR, 1);
 
   // enable support for icecast / shoutcast streams
-  if ( NULL == m_curlAliasList )
+  if ( NULL == state->m_curlAliasList )
     // m_curlAliasList is used only by this one place, but SetCommonOptions can
     // be called multiple times, only append to list if it's empty.
-    m_curlAliasList = g_curlInterface.slist_append(m_curlAliasList, "ICY 200 OK");
-  g_curlInterface.easy_setopt(h, CURLOPT_HTTP200ALIASES, m_curlAliasList);
+    state->m_curlAliasList = g_curlInterface.slist_append(state->m_curlAliasList, "ICY 200 OK");
+  g_curlInterface.easy_setopt(h, CURLOPT_HTTP200ALIASES, state->m_curlAliasList);
 
   // never verify peer, we don't have any certificates to do this
   g_curlInterface.easy_setopt(h, CURLOPT_SSL_VERIFYPEER, 0);
@@ -556,22 +557,22 @@ void CCurlFile::SetCommonOptions(CReadState* state)
 
 void CCurlFile::SetRequestHeaders(CReadState* state)
 {
-  if(m_curlHeaderList)
+  if(state->m_curlHeaderList)
   {
-    g_curlInterface.slist_free_all(m_curlHeaderList);
-    m_curlHeaderList = NULL;
+    g_curlInterface.slist_free_all(state->m_curlHeaderList);
+    state->m_curlHeaderList = NULL;
   }
 
   MAPHTTPHEADERS::iterator it;
   for(it = m_requestheaders.begin(); it != m_requestheaders.end(); it++)
   {
     CStdString buffer = it->first + ": " + it->second;
-    m_curlHeaderList = g_curlInterface.slist_append(m_curlHeaderList, buffer.c_str());
+    state->m_curlHeaderList = g_curlInterface.slist_append(state->m_curlHeaderList, buffer.c_str());
   }
 
   // add user defined headers
-  if (m_curlHeaderList && state->m_easyHandle)
-    g_curlInterface.easy_setopt(state->m_easyHandle, CURLOPT_HTTPHEADER, m_curlHeaderList);
+  if (state->m_curlHeaderList && state->m_easyHandle)
+    g_curlInterface.easy_setopt(state->m_easyHandle, CURLOPT_HTTPHEADER, state->m_curlHeaderList);
 
 }
 
@@ -1056,11 +1057,12 @@ int64_t CCurlFile::Seek(int64_t iFilePosition, int iWhence)
     m_state = new CReadState();
 
     g_curlInterface.easy_aquire(url.GetProtocol(), url.GetHostName(), &m_state->m_easyHandle, &m_state->m_multiHandle );
-
-    m_state->m_fileSize = m_oldState->m_fileSize;
   }
   else
     m_state->Disconnect();
+
+  // re-setup common curl options
+  m_state->m_fileSize = m_oldState->m_fileSize;
 
   /* caller might have changed some headers (needed for daap)*/
   SetRequestHeaders(m_state);
