@@ -358,8 +358,7 @@ class CAdvancedSettings
     int  m_guiDirtyRegionNoFlipTimeout;
     unsigned int m_addonPackageFolderSize;
 
-    bool m_alwaysForceBuffer;
-    int m_freeMemCachePercent;
+    unsigned int m_cacheMemBufferSize;
 
     bool m_jsonOutputCompact;
     unsigned int m_jsonTcpPort;

@@ -21,7 +21,6 @@
 #include "DVDInputStreamFile.h"
 #include "filesystem/File.h"
 #include "filesystem/IFile.h"
-#include "settings/AdvancedSettings.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"
 
@@ -52,13 +51,8 @@ bool CDVDInputStreamFile::Open(const char* strFile, const std::string& content)
   if (!m_pFile)
     return false;
 
-  unsigned int flags = READ_TRUNCATED | READ_BITRATE | READ_CHUNKED;
-
-  if (!URIUtils::IsOnDVD(strFile) && !URIUtils::IsBluray(strFile) && g_advancedSettings.m_alwaysForceBuffer)
-    flags |= READ_CACHED;
-
   // open file in binary mode
-  if (!m_pFile->Open(strFile, flags))
+  if (!m_pFile->Open(strFile, READ_TRUNCATED | READ_BITRATE | READ_CHUNKED))
   {
     delete m_pFile;
     m_pFile = NULL;
