@@ -207,6 +207,29 @@ typedef enum {
   XBMCVK_POWER          = 0XDE,
   XBMCVK_SLEEP          = 0XDF,
 
+	/* TLBB Remote */
+  XBMCVKRF_MUTE		= 0xE0,
+  XBMCVKRF_PREV		= 0xE1,
+  XBMCVKRF_PLAY      	= 0xE2,
+  XBMCVKRF_NEXT      	= 0xE3,
+  XBMCVKRF_WIFI      	= 0xE4,
+  XBMCVKRF_REW	    	= 0xE5,
+  XBMCVKRF_STOP      	= 0xE6,
+  XBMCVKRF_FFW       	= 0xE7,
+  XBMCVKRF_MENU      	= 0xE8,
+  XBMCVKRF_SETTINGS  	= 0xE9,
+  XBMCVKRF_HOME      	= 0xEA,
+  XBMCVKRF_TEXT      	= 0xEB,
+  XBMCVKRF_MUSIC     	= 0xEC,
+  XBMCVKRF_MOVIES    	= 0xEE,
+  XBMCVKRF_TV        	= 0xEF,
+  XBMCVKRF_PICTURES  	= 0xF0,
+  XBMCVKRF_INFO      	= 0xF1,
+  XBMCVKRF_RED       	= 0xF2,
+  XBMCVKRF_GREEN     	= 0xF3,
+  XBMCVKRF_YELLOW    	= 0xF4,
+  XBMCVKRF_BLUE      	= 0xF5,
+
   XBMCVK_LAST           = 0xFF
 } XBMCVKey;
 
