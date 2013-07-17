@@ -228,6 +228,29 @@ typedef enum {
   XBMCK_SHUFFLE           = 342,
   XBMCK_FASTFORWARD       = 343,
 
+	/* TLBB Remote */
+  XBMCKRF_MUTE      = 0x43,
+  XBMCKRF_PREV      = 0x00b4,
+  XBMCKRF_PLAY      = 0x0225,
+  XBMCKRF_NEXT      = 0x40,
+  XBMCKRF_WIFI      = 0x42,
+  XBMCKRF_REW	    = 0x3c,
+  XBMCKRF_STOP      = 0x41,
+  XBMCKRF_FFW       = 0x022e,
+  XBMCKRF_MENU      = 0x022d,
+  XBMCKRF_SETTINGS  = 0x8d,
+  XBMCKRF_HOME      = 0x3d,
+  XBMCKRF_TEXT      = 0x3a,
+  XBMCKRF_MUSIC     = 0x008a,
+  XBMCKRF_MOVIES    = 0x01b6,
+  XBMCKRF_TV        = 0x0088,
+  XBMCKRF_PICTURES  = 0x003b,
+  XBMCKRF_INFO      = 0x0095,
+  XBMCKRF_RED       = 0x0096,
+  XBMCKRF_GREEN     = 0x0097,
+  XBMCKRF_YELLOW    = 0x0098,
+  XBMCKRF_BLUE      = 0x009a,
+
   XBMCK_LAST
 } XBMCKey;
 
