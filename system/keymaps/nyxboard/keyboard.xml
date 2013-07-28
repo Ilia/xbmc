@@ -2,7 +2,7 @@
  <global>
   <keyboard name="Motorola Nyxboard Hybrid">
 	<!-- <>power</>-->									<!-- Button 01 : Power -->
-	<f>Mute</f>											<!-- Button 02 : Mute -->
+	<f10>Mute</f10>											<!-- Button 02 : Mute -->
 	<media_rewind>SkipPrevious</media_rewind>			<!-- Button 03 : |< -->
 	<browser_forward>Pause</browser_forward>			<!-- Button 04 : ||> -->
 	<f7>SkipPrevious</f7>								<!-- Button 05 : >| -->
