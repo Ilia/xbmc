@@ -2,40 +2,27 @@ import xbmc, xbmcaddon, xbmcgui, xbmcplugin,os
 import shutil
 import urllib2,urllib
 import re
+import datetime
+import time
 import extract
 import downloader
-import time
 
-USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'
 base='http://www.thelittleblackbox.nl/wizard_packs/'
 ADDON=xbmcaddon.Addon(id='plugin.video.tlbbwizard')
-VERSION = "1.0.1"
+VERSION = "1.0.0"
 PATH = "TLBB Wizard"            
     
 def CATEGORIES():
-    link = OPEN_URL('http://www.thelittleblackbox.nl/wizard_packs/wizard.txt').replace('\n','').replace('\r','')
-    match = re.compile('name="(.+?)".+?rl="(.+?)".+?mg="(.+?)".+?anart="(.+?)".+?escription="(.+?)"').findall(link)
-    for name,url,iconimage,fanart,description in match:
-        addDir(name,url,1,iconimage,fanart,description)
-    setView('movies', 'MAIN')
-    
-def OPEN_URL(url):
-    req = urllib2.Request(url)
-    req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
-    response = urllib2.urlopen(req)
-    link=response.read()
-    response.close()
-    return link
-    
+        addDir("US",'http://www.thelittleblackbox.nl/wizard_packs/US.zip',1,base+'US.png','','')
+        addDir("UK",'http://www.thelittleblackbox.nl/wizard_packs/UK.zip',1,base+'UK.png','','')
+        addDir("NL",'http://www.thelittleblackbox.nl/wizard_packs/NL.zip',1,base+'NL.png','','')
+        setView('movies', 'MAIN')
+        
 def wizard(name,url,description):
     path = xbmc.translatePath(os.path.join('special://home/addons','packages'))
     dp = xbmcgui.DialogProgress()
     dp.create("TLBB Wizard","Downloading ",'', 'Please Wait')
     lib=os.path.join(path, name+'.zip')
-    try:
-       os.remove(lib)
-    except:
-       pass
     downloader.download(url, lib, dp)
     addonfolder = xbmc.translatePath(os.path.join('special://','home'))
     time.sleep(2)
@@ -43,11 +30,67 @@ def wizard(name,url,description):
     print '======================================='
     print addonfolder
     print '======================================='
-    xbmc.executebuiltin("XBMC.Extract(%s,%s)" %(lib,addonfolder))
-    dp.close()
+    extract.all(lib,addonfolder,dp)
     dialog = xbmcgui.Dialog()
     dialog.ok("TLBB Wizard", "Please reboot to finalise installation")
+        
+def parseDate(dateString):
+    try:
+        return datetime.datetime.fromtimestamp(time.mktime(time.strptime(dateString.encode('utf-8', 'replace'), "%Y-%m-%d %H:%M:%S")))
+    except:
+        return datetime.datetime.today() - datetime.timedelta(days = 1) #force update
 
+def APP_LAUNCH():
+        versionNumber = int(xbmc.getInfoLabel("System.BuildVersion" )[0:2])
+        if versionNumber < 12:
+            if xbmc.getCondVisibility('system.platform.osx'):
+                if xbmc.getCondVisibility('system.platform.atv2'):
+                    log_path = '/var/mobile/Library/Preferences'
+                else:
+                    log_path = os.path.join(os.path.expanduser('~'), 'Library/Logs')
+            elif xbmc.getCondVisibility('system.platform.ios'):
+                log_path = '/var/mobile/Library/Preferences'
+            elif xbmc.getCondVisibility('system.platform.windows'):
+                log_path = xbmc.translatePath('special://home')
+                log = os.path.join(log_path, 'xbmc.log')
+                logfile = open(log, 'r').read()
+            elif xbmc.getCondVisibility('system.platform.linux'):
+                log_path = xbmc.translatePath('special://home/temp')
+            else:
+                log_path = xbmc.translatePath('special://logpath')
+            log = os.path.join(log_path, 'xbmc.log')
+            logfile = open(log, 'r').read()
+            match=re.compile('Starting XBMC \((.+?) Git:.+?Platform: (.+?)\. Built.+?').findall(logfile)
+        elif versionNumber > 11:
+            print '======================= more than ===================='
+            log_path = xbmc.translatePath('special://logpath')
+            log = os.path.join(log_path, 'xbmc.log')
+            logfile = open(log, 'r').read()
+            match=re.compile('Starting XBMC \((.+?) Git:.+?Platform: (.+?)\. Built.+?').findall(logfile)
+        else:
+            logfile='Starting XBMC (Unknown Git:.+?Platform: Unknown. Built.+?'
+            match=re.compile('Starting XBMC \((.+?) Git:.+?Platform: (.+?)\. Built.+?').findall(logfile)
+        print '==========================   '+PATH+' '+VERSION+'  =========================='
+        try:
+            from hashlib import md5
+        except:
+            from md5 import md5
+        from random import randint
+        import time
+        from urllib import unquote, quote
+        from os import environ
+        from hashlib import sha1
+        import platform
+
+def checkdate(dateString):
+    try:
+        return datetime.datetime.fromtimestamp(time.mktime(time.strptime(dateString.encode('utf-8', 'replace'), "%Y-%m-%d %H:%M:%S")))
+    except:
+        return datetime.datetime.today() - datetime.timedelta(days = 1000) #force update
+
+
+APP_LAUNCH()
+		
 def addDir(name,url,mode,iconimage,fanart,description):
         u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)+"&iconimage="+urllib.quote_plus(iconimage)+"&fanart="+urllib.quote_plus(fanart)+"&description="+urllib.quote_plus(description)
         ok=True
@@ -56,7 +99,7 @@ def addDir(name,url,mode,iconimage,fanart,description):
         liz.setProperty( "Fanart_Image", fanart )
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=False)
         return ok
-        
+                
 def get_params():
         param=[]
         paramstring=sys.argv[2]
@@ -74,6 +117,7 @@ def get_params():
                                 param[splitparams[0]]=splitparams[1]
                                 
         return param
+        
                       
 params=get_params()
 url=None
@@ -82,6 +126,7 @@ mode=None
 iconimage=None
 fanart=None
 description=None
+
 
 try:
         url=urllib.unquote_plus(params["url"])
@@ -120,11 +165,11 @@ def setView(content, viewType):
         xbmcplugin.setContent(int(sys.argv[1]), content)
     if ADDON.getSetting('auto-view')=='true':
         xbmc.executebuiltin("Container.SetViewMode(%s)" % ADDON.getSetting(viewType) )
-                
+        
 if mode==None or url==None or len(url)<1:
         CATEGORIES()
        
 elif mode==1:
         wizard(name,url,description)
-        
+                
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
