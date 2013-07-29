@@ -223,29 +223,6 @@ static const XBMCKEYTABLE XBMCKeyTable[] =
 , { XBMCK_PRINT,                  0,    0, XBMCVK_PRINTSCREEN,   "printscreen" }
 , { XBMCK_POWER,                  0,    0, XBMCVK_POWER,         "power" }
 , { XBMCK_SLEEP,                  0,    0, XBMCVK_SLEEP,         "sleep" }
-
-// TLBB Remote
-, { XBMCKRF_MUTE,                 0,    0, XBMCVKRF_MUTE,        "tlbb_mute" }		
-, { XBMCKRF_PREV,                 0,    0, XBMCVKRF_PREV,        "tlbb_prev" }
-, { XBMCKRF_PLAY,                 0,    0, XBMCVKRF_PLAY,        "tlbb_play" }
-, { XBMCKRF_NEXT,                 0,    0, XBMCVKRF_NEXT,        "tlbb_next" }
-, { XBMCKRF_WIFI,                 0,    0, XBMCVKRF_WIFI,        "tlbb_wifi" }
-, { XBMCKRF_REW,                  0,    0, XBMCVKRF_REW,         "tlbb_rew" }
-, { XBMCKRF_STOP,                 0,    0, XBMCVKRF_STOP,        "tlbb_stop" }
-, { XBMCKRF_FFW,                  0,    0, XBMCVKRF_FFW,         "tlbb_ffw" }
-, { XBMCKRF_MENU,                 0,    0, XBMCVKRF_MENU,        "tlbb_menu" }
-, { XBMCKRF_SETTINGS,             0,    0, XBMCVKRF_SETTINGS,    "tlbb_settings" }
-, { XBMCKRF_HOME,                 0,    0, XBMCVKRF_HOME,        "tlbb_home" }
-, { XBMCKRF_TEXT,                 0,    0, XBMCVKRF_TEXT,        "tlbb_text" }
-, { XBMCKRF_MUSIC,                0,    0, XBMCVKRF_MUSIC,       "tlbb_music" }
-, { XBMCKRF_MOVIES,               0,    0, XBMCVKRF_MOVIES,      "tlbb_movies" }
-, { XBMCKRF_TV,                	  0,    0, XBMCVKRF_TV,          "tlbb_tv" }
-, { XBMCKRF_PICTURES,             0,    0, XBMCVKRF_PICTURES,    "tlbb_pictures" }
-, { XBMCKRF_INFO,                 0,    0, XBMCVKRF_INFO,        "tlbb_info" }
-, { XBMCKRF_RED,                  0,    0, XBMCVKRF_RED,         "tlbb_red" }
-, { XBMCKRF_GREEN,                0,    0, XBMCVKRF_GREEN,       "tlbb_green" }
-, { XBMCKRF_YELLOW,               0,    0, XBMCVKRF_YELLOW,      "tlbb_yellow" }
-, { XBMCKRF_BLUE,                 0,    0, XBMCVKRF_BLUE,        "tlbb_blue" }
 };
 
 static int XBMCKeyTableSize = sizeof(XBMCKeyTable)/sizeof(XBMCKEYTABLE);
