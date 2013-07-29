@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<settings>
-    <category label="Auto-View">
-		<setting id="auto-view" type="bool" label="Enable Auto View" default="true"/>
-   	</category>	   	
-  </settings>
