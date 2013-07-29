@@ -56,7 +56,7 @@ def checkForUpdate(silent = 1):
     allDone(silent)
 
 
-def allDone(silent, mins = 5):
+def allDone(silent, mins = 10080):
     setAlarm(mins)
 
     if not silent:
