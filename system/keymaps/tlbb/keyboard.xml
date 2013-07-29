@@ -2,45 +2,45 @@
   <global>
   <keyboard name="Motorola Nyxboard Hybrid">
 	<!-- <>power</>-->						<!-- Button 01 : Power -->
-	<tlbb_mute>Mute</tlbb_mute>					<!-- Button 02 : Mute -->
-	<tlbb_prev>SkipPrevious</tlbb_prev>				<!-- Button 03 : |< -->
-	<tlbb_play>Pause</tlbb_play>					<!-- Button 04 : ||> -->
-	<tlbb_next>SkipNext</tlbb_next>					<!-- Button 05 : >| -->
-	<tlbb_wifi>ActivateWindow(accesspoints)</tlbb_wifi>		<!-- Button 06 : Wifi -->
-	<tlbb_rew>analogseekback</tlbb_rew>				<!-- Button 07 : << -->
-	<tlbb_stop>Stop</tlbb_stop>					<!-- Button 08 : stop -->
-	<tlbb_ffw>analogseekforward</tlbb_ffw>				<!-- Button 09 : >> -->
-	<tlbb_menu>ContextMenu</tlbb_menu>				<!-- Button 10 : menu -->
+	<f>Mute</f>							<!-- Button 02 : Mute -->
+	<media_rewind>SkipPrevious</media_rewind>			<!-- Button 03 : |< -->
+	<browser_forward>Pause</browser_forward>			<!-- Button 04 : ||> -->
+	<f7>SkipPrevious</f7>						<!-- Button 05 : >| -->
+	<f9>ActivateWindow(accesspoints)</f9>				<!-- Button 06 : Wifi -->
+	<f3>analogseekback</f3>						<!-- Button 07 : << -->
+	<f8>Stop</f8>							<!-- Button 08 : stop -->
+	<!-- <>analogseekforward</> -->					<!-- Button 09 : >> -->
+	<!-- <>ContextMenu</> -->					<!-- Button 10 : menu -->
 	<!-- <>mouse on/off</> -->					<!-- Button 11 : mouse (not available for keycode) -->
-	<tlbb_settings>ActivateWindow(Settings)</tlbb_settings>		<!-- Button 12 : settings/wheel -->
-	<tlbb_back>Back</tlbb_back>					<!-- Button 13 : back -->
+	<!-- <>ActivateWindow(Settings)</> -->				<!-- Button 12 : settings/wheel -->
+	<backspace>Back</backspace>					<!-- Button 13 : back -->
 	<!-- <>up</> -->						<!-- Button 14 : up -->
 	<!-- <>left</> -->						<!-- Button 15 : left -->
 	<!-- <>OK</> -->						<!-- Button 16 : OK -->
 	<!-- <>right</> -->						<!-- Button 17 : right -->
 	<!-- <>down</> -->						<!-- Button 18 : down -->
-	<!-- <f12>VolumeUp</f12> -->					<!-- Button 19 : vol+ -->
-	<!-- <f11>VolumeDown</f11> -->					<!-- Button 20 : vol- -->
-	<!-- <pageup>PageUp</pageup> -->				<!-- Button 21 : pg+ -->
-	<!-- <pagedown>PageDown</pagedown> -->				<!-- Button 22 : pg- -->
-	<tlbb_home>XBMC.ActivateWindow(Home)</tlbb_home>		<!-- Button 23 : home -->
-	<tlbb_text>ContextMenu</tlbb_text>				<!-- Button 24 : = -->
-	<!-- <one>Number1</one> -->					<!-- Button 25 : 1 -->
-    	<!-- <two>Number2</two> -->					<!-- Button 26 : 2 -->
-    	<!-- <three>Number3</three> -->					<!-- Button 27 : 3 -->
-    	<tlbb_music>ActivateWindow(MyMusic)</tlbb_music>		<!-- Button 28 : music -->
-	<!-- <four>Number4</four> -->					<!-- Button 29 : 4 -->
-    	<!-- <five>Number5</five> -->					<!-- Button 30 : 5 -->
-    	<!-- <six>Number6</six> -->					<!-- Button 31 : 6 -->
-    	<tlbb_music>ActivateWindow(MyMovies)</tlbb_music>		<!-- Button 32 : movies -->
-	<!-- <seven>Number7</seven> -->					<!-- Button 33 : 7 -->
-    	<!-- <eight>Number8</eight> -->					<!-- Button 34 : 8 -->
-    	<!-- <nine>Number9</nine> -->					<!-- Button 35 : 9 -->
-	<tlbb_tv>ActivateWindow(MySeries)</tlbb_tv>			<!-- Button 36 : series -->
-	<tlbb_info>Info</tlbb_info>					<!-- Button 37 : info -->
-	<!-- <zero>Number0</zero> -->					<!-- Button 38 : 0 -->
-	<!-- <backspace>Back</backspace> -->				<!-- Button 39 : back -->
-	<tlbb_pictures>ActivateWindow(pictures)</tlbb_pictures>		<!-- Button 40 : pictures -->
+	<f12>VolumeUp</f12>						<!-- Button 19 : vol+ -->
+	<f11>VolumeDown</f11>						<!-- Button 20 : vol- -->
+	<pageup>PageUp</pageup>						<!-- Button 21 : pg+ -->
+	<pagedown>PageDown</pagedown>					<!-- Button 22 : pg- -->
+	<f4>XBMC.ActivateWindow(Home)</f4>				<!-- Button 23 : home -->
+	<f1>ContextMenu</f1>						<!-- Button 24 : = -->
+	<one>Number1</one>						<!-- Button 25 : 1 -->
+    	<two>Number2</two>						<!-- Button 26 : 2 -->
+    	<three>Number3</three>						<!-- Button 27 : 3 -->
+    	<!-- <>ActivateWindow(MyMusic)</> -->				<!-- Button 28 : music -->
+	<four>Number4</four>						<!-- Button 29 : 4 -->
+    	<five>Number5</five>						<!-- Button 30 : 5 -->
+    	<six>Number6</six>						<!-- Button 31 : 6 -->
+    	<!-- <>ActivateWindow(MyMovies)</> -->				<!-- Button 32 : movies -->
+	<seven>Number7</seven>						<!-- Button 33 : 7 -->
+    	<eight>Number8</eight>						<!-- Button 34 : 8 -->
+    	<nine>Number9</nine>						<!-- Button 35 : 9 -->
+	<!-- <>ActivateWindow(MySeries)</> -->				<!-- Button 36 : series -->
+	<!-- <>Info</> -->						<!-- Button 37 : info -->
+	<zero>Number0</zero>						<!-- Button 38 : 0 -->
+	<backspace>Back</backspace>					<!-- Button 39 : back -->
+	<f2>ActivateWindow(pictures)</f2>				<!-- Button 40 : pictures -->
 	<!-- <>red</> -->						<!-- Button 41 : red -->
 	<!-- <>green</> -->						<!-- Button 42 : green -->
 	<!-- <>yellow</> -->						<!-- Button 43 : yellow -->
@@ -94,11 +94,11 @@
 
   <FullscreenVideo>
     <keyboard name="Motorola Nyxboard Hybrid">
-	<tlbb_text>RunScript(script.xbmc.subtitles)</tlbb_text>		
+	<!-- <>RunScript(script.xbmc.subtitles)</> -->			<!-- Red -->
 	<!-- <>NextSubtitle</> -->					<!-- Green -->
 	<!-- <>SubtitleDelay</> -->					<!-- Yellow -->
 	<!-- <>AudioDelay</> -->					<!-- Blue -->
-	<tlbb_info>CodecInfo</tlbb_info>						
+	<!-- <>CodecInfo</> -->						<!-- Info  -->						
     </keyboard>
   </FullscreenVideo>
 
