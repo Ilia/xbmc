@@ -262,6 +262,10 @@ KeyMap keyMap[] = {
   { KEY_FASTFORWARD   , XBMCK_FASTFORWARD },
   { KEY_PRINT         , XBMCK_PRINT       },
   { KEY_QUESTION      , XBMCK_HELP        },
+  { 384		      , XBMCK_RED	  },
+  { 378               , XBMCK_GREEN       },
+  { 381               , XBMCK_YELLOW      },
+  { 366               , XBMCK_BLUE        },
 };
 
 /*

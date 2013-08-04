@@ -228,6 +228,11 @@ typedef enum {
   XBMCK_SHUFFLE           = 342,
   XBMCK_FASTFORWARD       = 343,
 
+  XBMCK_RED		  = 350,
+  XBMCK_GREEN             = 351,
+  XBMCK_YELLOW            = 352,
+  XBMCK_BLUE              = 353,
+
   XBMCK_LAST
 } XBMCKey;
 
