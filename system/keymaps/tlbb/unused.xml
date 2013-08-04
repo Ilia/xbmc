@@ -1,0 +1,107 @@
+      <!-- Empty -->
+      <key id="0x0152">Record</key>  <!-- Record -->
+      <f8>noop</f8> <!-- Mouse On/Off Fix -->
+     <play_pause>Play</play_pause> <!-- Play Button -->
+      <pause>Pause</pause> <!-- Pause Button -->
+      <guide_btn>XBMC.ActivateWindowAndFocus(MyPVR, 31,0, 10,0)</guide_btn><!-- Guide Right Menu 2 -->
+      <playlist_btn>Playlist</playlist_btn><!-- List Right Menu 3 -->
+      <numpadnine>FullScreen</numpadnine> <!-- */# -->
+
+      <f9 mod="ctrl">ActivateWindow(video)</red_btn>    <!-- ctrl Red --> 		<!-- 2Change -->
+      <f10 mod="ctrl">ActivateWindow(music)</green_btn>    <!-- ctrl Green -->	<!-- 2Change -->
+      <f11 mod="ctrl">ActivateWindow(pictures)</yellow_btn> <!-- ctrl Yellow --> 	<!-- 2Change -->
+      <f12 mod="ctrl">ActivateWindow(programs)</blue_btn> <!-- ctrl Blue --> 	<!-- 2Change -->
+
+  <global>
+      <left_btn mod="ctrl">analogseekback</left_btn> 					<!-- Keyboard -->
+      <right_btn mod="ctrl">analogseekforward</right_btn>  				<!-- Keyboard -->
+      <m>ActivateWindow(PlayerControls)</m> 						<!-- Keyboard -->
+      <s>ActivateWindow(shutdownmenu)</s> 						<!-- Keyboard -->
+      <escape>PreviousMenu</escape> 							<!-- Keyboard -->
+      <printscreen>Screenshot</printscreen> 						<!-- Keyboard -->
+      <backslash>ToggleFullScreen</backslash>						<!-- Keyboard -->
+      <home_btn mod="ctrl">FirstPage</home_btn>						<!-- Keyboard -->
+      <end>LastPage</end>								<!-- Keyboard -->			
+      <e>XBMC.ActivateWindowAndFocus(MyPVR, 31,0, 10,0)</e> <!-- TV Guide -->		<!-- Keyboard -->
+      <h>XBMC.ActivateWindowAndFocus(MyPVR, 32,0, 11,0)</h> <!-- Live TV  --> 		<!-- Keyboard -->
+      <j>XBMC.ActivateWindowAndFocus(MyPVR, 33,0, 12,0)</j> <!-- My Radio --> 		<!-- Keyboard -->
+      <k>XBMC.ActivateWindowAndFocus(MyPVR, 34,0, 13,0)</k> <!-- Recorded TV -->	<!-- Keyboard -->
+      <b>XBMC.ActivateWindowAndFocus(MyPVR, 35,0, 14,0)</b>				<!-- Keyboard -->
+      <launch_media_select>XBMC.ActivateWindow(MyMusic)</launch_media_select> 		<!-- Keyboard -->
+      <launch_app1_pc_icon>ActivateWindow(MyPrograms)</launch_app1_pc_icon>   		<!-- Keyboard -->
+      <m mod="ctrl">ActivateWindow(music)</m>    <!-- My music -->			<!-- Keyboard -->
+      <e mod="ctrl">ActivateWindow(video)</e>    <!-- videos -->			<!-- Keyboard -->
+      <m mod="ctrl,shift">PlayerControl(ShowVideoMenu)</m> <!-- DVD menu -->		<!-- Keyboard -->
+      <t mod="ctrl,shift">ActivateWindow(MyPVR)</t>    <!-- My TV -->			<!-- Keyboard -->
+  <LoginScreen>
+      <end mod="ctrl">XBMC.ShutDown()</end> 						<!-- Keyboard -->
+  <Home>
+      <end mod="ctrl">XBMC.ShutDown()</end>  						<!-- Keyboard -->
+  <MyTV>
+      <m>Move</m>  <!-- 2Change --> 		 					<!-- Keyboard -->
+      <r>Rename</r>  <!-- 2Change --> 		 					<!-- Keyboard -->
+  <MyFiles>
+      <m>Move</m>  <!-- 2Change --> 		 					<!-- Keyboard -->
+      <r>Rename</r>  <!-- 2Change --> 		 					<!-- Keyboard -->
+  <FullscreenVideo>
+      <period>StepForward</period>				<!-- Keyboard -->
+      <comma>StepBack</comma>					<!-- Keyboard -->
+      <quote>SmallStepBack</quote>	 			<!-- Keyboard -->
+      <opensquarebracket>BigStepForward</opensquarebracket> 	<!-- Keyboard -->
+      <closesquarebracket>BigStepBack</closesquarebracket>  	<!-- Keyboard -->
+      <o>CodecInfo</o>						<!-- Keyboard -->
+      <t mod="ctrl">SubtitleAlign</t>  				<!-- Keyboard -->
+      <up_btn mod="ctrl">SubtitleShiftUp</up_btn>   		<!-- Keyboard -->
+      <down_btn mod="ctrl">SubtitleShiftDown</down_btn>  	<!-- Keyboard -->
+      <v>XBMC.ActivateWindow(Teletext)</v>  			<!-- Keyboard -->
+  <FullscreenInfo>
+      <o>CodecInfo</o> 						<!-- Keyboard -->
+      <period>StepForward</period>  <!-- 2Change -->
+  <Visualisation>
+    <keyboard name="Motorola Nyxboard Hybrid">
+      <p>ActivateWindow(VisualisationPresetList)</p> 	<!-- Keyboard -->
+      <v>ActivateWindow(VisualisationSettings)</v>	<!-- Keyboard -->
+      <l>LockPreset</l>				<!-- Keyboard -->
+      <!--<back>NextPreset</back>!-->
+      <o>CodecInfo</o>						<!-- Keyboard -->
+      <c>ActivateWindow(PVROSDChannels)</c> <!-- Keyboard -->
+      <guide_btn>ActivateWindow(PVROSDGuide)</guide_btn>
+  <MusicOSD>
+      <o>CodecInfo</o> 						<!-- Keyboard -->
+      <p>ActivateWindow(VisualisationPresetList)</p>  <!-- Keyboard -->
+      <v>ActivateWindow(VisualisationSettings)</v>  <!-- Keyboard -->
+  <VisualisationSettings>
+      <o>CodecInfo</o> 						<!-- Keyboard -->
+      <p>ActivateWindow(VisualisationPresetList)</p>	 <!-- Keyboard -->
+      <v>Back</v>					<!-- Keyboard -->
+  <VisualisationPresetList>
+      <o>CodecInfo</o> 						<!-- Keyboard -->
+      <p>Back</p> 						<!-- Keyboard -->
+      <v>Back</v> 						<!-- Keyboard -->
+  <SlideShow>
+      <o>CodecInfo</o>
+  <VideoOSD>
+      <g mod="ctrl">Back</g> <!-- MCE Guide button -->		<!-- Keyboard -->
+      <o>CodecInfo</o>						<!-- Keyboard -->
+  <VideoMenu>
+      <opensquarebracket>BigStepForward</opensquarebracket> 						<!-- Keyboard -->
+      <closesquarebracket>BigStepBack</closesquarebracket> 						<!-- Keyboard -->
+      <o>CodecInfo</o>						<!-- Keyboard -->
+      <green_btn>ShowSubtitles</green_btn>
+      <yellow_btn>SubtitleDelay</yellow_btn>
+      <blue_btn>NextSubtitle</blue_btn>
+  <OSDVideoSettings>
+      <o>CodecInfo</o>						<!-- Keyboard -->
+  <OSDAudioSettings>
+       <o>CodecInfo</o>						<!-- Keyboard -->
+  <Teletext>
+      <v>Back</v>  			<!-- Keyboard -->
+  <PVROSDChannels>
+      <c>Close</c>					<!-- Keyboard -->
+  <PVROSDGuide>
+      <guide_btn>Close</guide_btn>
+  <ShutdownMenu>
+      <s>Back</s>					<!-- Keyboard -->
+
+
+
