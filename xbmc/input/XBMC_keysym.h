@@ -232,6 +232,9 @@ typedef enum {
   XBMCK_GREEN             = 351,
   XBMCK_YELLOW            = 352,
   XBMCK_BLUE              = 353,
+  XBMCK_MUSIC             = 354,
+  XBMCK_MOVIES            = 355,
+  XBMCK_SERIES            = 356,
 
   XBMCK_LAST
 } XBMCKey;

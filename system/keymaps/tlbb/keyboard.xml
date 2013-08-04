@@ -1,552 +1,503 @@
-<!-- This file contains the mapping of keys (gamepad, remote, and keyboard) to actions within XBMC -->
-<!-- The <global> section is a fall through - they will only be used if the button is not          -->
-<!-- used in the current window's section.  Note that there is only handling                       -->
-<!-- for a single action per button at this stage.                                                 -->
-<!-- For joystick/gamepad configuration under linux/win32, see below as it differs from xbox       -->
-<!-- gamepads.                                                                                     -->
-
-<!-- The format is:                      -->
-<!--    <device>                         -->
-<!--      <button>action</button>        -->
-<!--    </device>                        -->
-
-<!-- To map keys from other remotes using the RCA protocol, you may add <universalremote> blocks -->
-<!-- In this case, the tags used are <obc#> where # is the original button code (OBC) of the key -->
-<!-- You set it up by adding a <universalremote> block to the window or <global> section:       -->
-<!--    <universalremote>             -->
-<!--       <obc45>Stop</obc45>         -->
-<!--    </universalremote>            -->
-
-<!-- Note that the action can be a built-in function.                 -->
-<!--  eg <B>XBMC.ActivateWindow(MyMusic)</B>                         -->
-<!-- would automatically go to My Music on the press of the B button. -->
-
-<!-- Joysticks / Gamepads:                                                                    -->
-<!--   See the sample PS3 controller configuration below for the format.                      -->
-<!--                                                                                          -->
-<!--  Joystick Name:                                                                          -->
-<!--   Do 'cat /proc/bus/input/devices' or see your xbmc log file  to find the names of       -->
-<!--   detected joysticks. The name used in the configuration should match the detected name. -->
-<!--                                                                                          -->
-<!--  Button Ids:                                                                             -->
-<!--   'id' is the button ID used by SDL. Joystick button ids of connected joysticks appear   -->
-<!--   in xbmc.log when they are pressed. Use your log to map custom buttons to actions.      -->
-<!--                                                                                          -->
-<!--  Axis Ids / Analog Controls                                                              -->
-<!--   Coming soon.                                                                           -->
+<!-- Mappings for The Little Black Box Remote -->
 <keymap>
   <global>
-    <keyboard>
-      <key id='150'>XBMC.ActivateWindow(Home)</key>
-      <key id='151'>ContextMenu</key>
-      <key id='152'>Left</key>
-      <key id='153'>Right</key>
-      <p>Play</p>
-      <q>Queue</q>
-      <f>FastForward</f>
-      <r>Rewind</r>
-      <left>Left</left>
-      <right>Right</right>
-      <up>Up</up>
-      <down>Down</down>
-      <left mod="ctrl">analogseekback</left>
-      <right mod="ctrl">analogseekforward</right>
-      <pageup>PageUp</pageup>
-      <pagedown>PageDown</pagedown>
-      <return>Select</return>
-      <enter>Select</enter>
-      <backspace>Back</backspace>
-      <key id='65446'>Back</key>
-      <m>ActivateWindow(PlayerControls)</m>
-      <s>ActivateWindow(shutdownmenu)</s>
-      <escape>PreviousMenu</escape>
-      <i>Info</i>
-      <menu>ContextMenu</menu>
-      <c>ContextMenu</c>
-      <space>Pause</space>
-      <x>Stop</x>
-      <period>SkipNext</period>
-      <comma>SkipPrevious</comma>
-      <tab>FullScreen</tab>
-      <printscreen>Screenshot</printscreen>
-      <s mod="ctrl">Screenshot</s>
-      <minus>VolumeDown</minus>
-      <plus>VolumeUp</plus>
-      <equals>VolumeUp</equals>
-      <zero>Number0</zero>
-      <one>Number1</one>
-      <two>Number2</two>
-      <three>Number3</three>
-      <four>Number4</four>
-      <five>Number5</five>
-      <six>Number6</six>
-      <seven>Number7</seven>
-      <eight>Number8</eight>
-      <nine>Number9</nine>
-      <numpadminus>VolumeDown</numpadminus>
-      <numpadplus>VolumeUp</numpadplus>
-      <numpadzero>Number0</numpadzero>
-      <numpadone>Number1</numpadone>
-      <numpadtwo>Number2</numpadtwo>
-      <numpadthree>Number3</numpadthree>
-      <numpadfour>Number4</numpadfour>
-      <numpadfive>Number5</numpadfive>
-      <numpadsix>Number6</numpadsix>
-      <numpadseven>Number7</numpadseven>
-      <numpadeight>Number8</numpadeight>
-      <numpadnine>Number9</numpadnine>
-      <backslash>ToggleFullScreen</backslash>
-      <home>FirstPage</home>
-      <end>LastPage</end>
-      <power>ActivateWindow(shutdownmenu)</power>
-      <sleep>ActivateWindow(shutdownmenu)</sleep>
-      <!-- PVR windows -->
-      <e>XBMC.ActivateWindowAndFocus(MyPVR, 31,0, 10,0)</e>
-      <h>XBMC.ActivateWindowAndFocus(MyPVR, 32,0, 11,0)</h>
-      <j>XBMC.ActivateWindowAndFocus(MyPVR, 33,0, 12,0)</j>
-      <k>XBMC.ActivateWindowAndFocus(MyPVR, 34,0, 13,0)</k>
-      <b>XBMC.ActivateWindowAndFocus(MyPVR, 35,0, 14,0)</b>
-      <!-- Multimedia keyboard keys -->
-      <browser_back>Back</browser_back>
-      <browser_forward/>
-      <browser_refresh/>
-      <browser_stop/>
-      <browser_search/>
-      <browser_favorites>ActivateWindow(Favourites)</browser_favorites>
-      <browser_home>XBMC.ActivateWindow(Home)</browser_home>
-      <volume_mute>Mute</volume_mute>
-      <volume_down>VolumeDown</volume_down>
-      <volume_up>VolumeUp</volume_up>
-      <next_track>SkipNext</next_track>
-      <prev_track>SkipPrevious</prev_track>
-      <stop>Stop</stop>
-      <play_pause>Pause</play_pause>
-      <launch_mail></launch_mail>
-      <launch_media_select>XBMC.ActivateWindow(MyMusic)</launch_media_select>
-      <launch_app1_pc_icon>ActivateWindow(MyPrograms)</launch_app1_pc_icon>
-      <launch_app2_pc_icon>ActivateWindow(MyPrograms)</launch_app2_pc_icon>
-      <launch_file_browser/>
-      <launch_media_center/>
-      <!-- ****************************************************** -->
-      <!-- MS Media Center keyboard shortcuts sent by MCE remotes -->
-      <!-- See http://msdn.microsoft.com/en-us/library/bb189249.aspx -->
-      <p mod="ctrl,shift">Play</p>        <!-- Play -->
-      <s mod="ctrl,shift">Stop</s>        <!-- Stop -->
-      <p mod="ctrl">Pause</p>             <!-- Pause -->
-      <f mod="ctrl,shift">FastForward</f> <!-- Fwd -->
-      <b mod="ctrl,shift">Rewind</b>      <!-- Rew -->
-      <f mod="ctrl">SkipNext</f>          <!-- Skip -->
-      <b mod="ctrl">SkipPrevious</b>      <!-- Replay -->
-      <d mod="ctrl">Info</d>              <!-- MCE Details -->
-      <f10>VolumeUp</f10>                 <!-- MCE Vol up -->
-      <f9>VolumeDown</f9>                 <!-- MCE Vol down -->
-      <f8>Mute</f8>                       <!-- MCE mute -->
-      <g mod="ctrl">ActivateWindowAndFocus(MyPVR, 31,0, 10,0)</g>  <!-- MCE Guide -->
-      <m mod="ctrl">ActivateWindow(music)</m>    <!-- MCE My music -->
-      <i mod="ctrl">ActivateWindow(pictures)</i> <!-- MCE My pictures -->
-      <e mod="ctrl">ActivateWindow(video)</e>    <!-- MCE videos -->
-      <m mod="ctrl,shift">PlayerControl(ShowVideoMenu)</m>         <!-- MCE DVD menu -->
-      <o mod="ctrl">ActivateWindowAndFocus(MyPVR, 34,0, 13,0)</o>  <!-- MCE Recorded TV -->
-      <t mod="ctrl">ActivateWindowAndFocus(MyPVR, 32,0, 11,0)</t>  <!-- MCE Live TV  -->
-      <t mod="ctrl,shift">ActivateWindow(MyPVR)</t>                <!-- MCE My TV -->
-      <a mod="ctrl">ActivateWindowAndFocus(MyPVR, 33,0, 12,0)</a>  <!-- MCE My Radio -->
-      <!-- MCE keypresses without an obvious use in XBMC -->
-      <u mod="ctrl">Notification(MCEKeypress, DVD subtitle, 3)</u>
-      <a mod="ctrl,shift">Notification(MCEKeypress, DVD audio, 3)</a>
+    <keyboard name="The Little Black Box Remote">
+      <!-- <>power</>-->										<!-- Button 01 : Power -->
+      <f10>Mute</f10>										<!-- Button 02 : Mute -->
+      <rewind>SkipPrevious</rewind>							<!-- Button 03 : |< -->
+      <play_pause>Play</play_pause>								<!-- Button 04 : ||> -->
+      <f7>SkipNext</f7>								<!-- Button 05 : >| -->
+      <f9>ActivateWindow(accesspoints)</f9>							<!-- Button 06 : Wifi -->
+      <f3>Rewind</f3>									<!-- Button 07 : << -->
+      <f8>Stop</f8>										<!-- Button 08 : stop -->
+      <fastforward>FastForward</fastforward>							<!-- Button 09 : >> -->
+      <menu>ContextMenu</menu>									<!-- Button 10 : menu -->
+      <!-- <>mouse on/off</> -->									<!-- Button 11 : mouse (not available for keycode) -->
+      <settings_btn>ActivateWindow(Settings)</settings_btn>						<!-- Button 12 : settings/wheel -->
+      <backspace>Back</backspace>									<!-- Button 13 : back -->
+      <up>Up</up>										<!-- Button 14 : up -->
+      <left>Left</left>										<!-- Button 15 : left -->
+      <select>Select</select>									<!-- Button 16 : OK -->
+      <right>Right</right>									<!-- Button 17 : right -->
+      <down>Down</down>										<!-- Button 18 : down -->
+      <f12>VolumeUp</f12>								<!-- Button 19 : vol+ -->
+      <f11>VolumeDown</f11>							<!-- Button 20 : vol- -->
+      <pageup>PageUp</pageup>  								<!-- Button 21 : pg+ -->
+      <pagedown>PageDown</pagedown>								<!-- Button 22 : pg- -->
+      <f4>ActivateWindow(Home)</f4>							<!-- Button 23 : home -->
+      <f1>ContextMenu</f1>									<!-- Button 24 : = -->
+      <one>Number1</one>										<!-- Button 25 : 1 -->
+      <two>Number2</two>										<!-- Button 26 : 2 -->
+      <three>Number3</three>										<!-- Button 27 : 3 -->
+      <music>ActivateWindow(Music)</music>							<!-- Button 28 : music -->
+      <four>Number4</four>										<!-- Button 29 : 4 -->
+      <five>Number5</five>										<!-- Button 30 : 5 -->
+      <six>Number6</six>										<!-- Button 31 : 6 -->
+      <movies>ActivateWindow(Videos,MovieTitles)</movies>						     	<!-- Button 32 : movies -->
+      <seven>Number7</seven>										<!-- Button 33 : 7 -->
+      <eight>Number8</eight>										<!-- Button 34 : 8 -->
+      <nine>Number9</nine>										<!-- Button 35 : 9 -->
+      <series>ActivateWindow(Videos,TvShowTitles)</series>							<!-- Button 36 : series -->
+      <info_btn>Info</info_btn>										<!-- Button 37 : info -->
+      <zero>Number0</zero>										<!-- Button 38 : 0 -->
+      <backspace>Back</backspace>										<!-- Button 39 : back -->
+      <f2>ActivateWindow(Pictures)</f2> 						<!-- Button 40 : pictures -->
+      <red>Close</red>  										<!-- Button 41 : red -->
+      <green>Close</green>									<!-- Button 42 : green -->
+      <yellow>Close</yellow>						<!-- Button 43 : yellow -->
+      <blue>FullScreen</blue>										<!-- Button 44 : blue -->
     </keyboard>
   </global>
   <LoginScreen>
-    <keyboard>
-      <end mod="ctrl">XBMC.ShutDown()</end>
+    <keyboard name="The Little Black Box Remote">
+      <!-- Empty -->
     </keyboard>
   </LoginScreen>
   <Home>
-    <keyboard>
-      <i>info</i>
-      <end mod="ctrl">XBMC.ShutDown()</end>
+    <keyboard name="The Little Black Box Remote">
+      <info_btn>Info</info_btn>
+      <f4>FullScreen</f4>
+      <f1>Playlist</f1>
+      <zero>Playlist</zero>
+      <yellow>ActivateWindow(Favourites)</yellow>
     </keyboard>
   </Home>
+  <Programs>
+    <keyboard name="The Little Black Box Remote">
+      <yellow>ActivateWindow(Favourites)</yellow>
+    </keyboard>
+  </Programs>
+  <Settings>
+    <keyboard name="The Little Black Box Remote">
+      <settings_btn>Back</settings_btn>
+      <yellow>ActivateWindow(Favourites)</yellow>
+    </keyboard>
+  </Settings>
   <VirtualKeyboard>
-    <keyboard>
-      <backspace>Backspace</backspace>
+    <keyboard name="The Little Black Box Remote">
+      <backspace>Backspace</backspace> 		 					<!-- Keyboard -->
     </keyboard>
   </VirtualKeyboard>
-  <MyTV>
-    <keyboard>
-      <delete>Delete</delete>
-      <m>Move</m>
-      <r>Rename</r>
-    </keyboard>
-  </MyTV>
   <MyFiles>
-    <keyboard>
-      <space>Highlight</space>
-      <delete>Delete</delete>
-      <m>Move</m>
-      <r>Rename</r>
+    <keyboard name="The Little Black Box Remote">
+      <pageup>PageUp</pageup>
+      <pagedown>PageDown</pagedown>
+      <red>Delete</red>
+      <green>Highlight</green>
+      <yellow>ActivateWindow(Favourites)</yellow>
     </keyboard>
   </MyFiles>
   <MyMusicPlaylist>
-    <keyboard>
-      <space>Back</space>
-      <delete>Delete</delete>
-      <u>MoveItemUp</u>
-      <d>MoveItemDown</d>
+    <keyboard name="The Little Black Box Remote">
+      <zero>Back</zero>
+      <pageup>MoveItemUp</pageup>
+      <pagedown>MoveItemDown</pagedown>
+      <red>Delete</red>
+      <yellow>ActivateWindow(Favourites)</yellow>
     </keyboard>
   </MyMusicPlaylist>
   <MyMusicPlaylistEditor>
-    <keyboard>
-      <u>MoveItemUp</u>
-      <d>MoveItemDown</d>
-      <delete>Delete</delete>
+    <keyboard name="The Little Black Box Remote">
+      <pageup>MoveItemUp</pageup>
+      <pagedown>MoveItemDown</pagedown>
+      <red>Delete</red>
+      <yellow>ActivateWindow(Favourites)</yellow>
     </keyboard>
   </MyMusicPlaylistEditor>
   <MyMusicFiles>
-    <keyboard>
-      <space>Playlist</space>
-      <q>Queue</q>
-      <delete>Delete</delete>
+    <keyboard name="The Little Black Box Remote">
+      <settings_btn>ActivateWindow(MusicSettings)</settings_btn>
+      <pageup>PageUp</pageup>
+      <pagedown>PageDown</pagedown>
+      <zero>ActivateWindow(MusicPlaylist)</zero>
+      <red>Delete</red>
+      <green>Queue</green>
+      <yellow>ActivateWindow(Favourites)</yellow>
     </keyboard>
   </MyMusicFiles>
   <MyMusicLibrary>
-    <keyboard>
-      <space>Playlist</space>
-      <q>Queue</q>
+    <keyboard name="The Little Black Box Remote">
+      <settings_btn>ActivateWindow(MusicSettings)</settings_btn>
+      <pageup>PageUp</pageup>
+      <pagedown>PageDown</pagedown>
+      <zero>ActivateWindow(MusicPlaylist)</zero>
+      <red>Delete</red>
+      <green>Queue</green>
+      <yellow>ActivateWindow(Favourites)</yellow>
     </keyboard>
   </MyMusicLibrary>
-  <FullscreenVideo>
-    <keyboard>
-      <f>FastForward</f>
-      <r>Rewind</r>
-      <period>StepForward</period>
-      <comma>StepBack</comma>
+  <MusicSettings>
+    <keyboard name="The Little Black Box Remote">
+      <settings_btn>Back</settings_btn>
+    </keyboard>
+  </MusicSettings>
+ <FullscreenVideo>
+    <keyboard name="The Little Black Box Remote">
+      <fastforward>FastForward</fastforward>
+      <f3>Rewind</f3>
       <backspace>Fullscreen</backspace>
-      <quote>SmallStepBack</quote>
-      <opensquarebracket>BigStepForward</opensquarebracket>
-      <closesquarebracket>BigStepBack</closesquarebracket>
-      <return>OSD</return>
-      <enter>OSD</enter>
-      <m>OSD</m>
-      <i>Info</i>
-      <o>CodecInfo</o>
-      <z>AspectRatio</z>
-      <t>ShowSubtitles</t>
-      <t mod="ctrl">SubtitleAlign</t>
-      <l>NextSubtitle</l>
+      <select>OSD</select>
+      <menu>OSD</menu>
+      <info_btn>Info</info_btn>
       <left>StepBack</left>
       <right>StepForward</right>
       <up>BigStepForward</up>
       <down>BigStepBack</down>
-      <a>AudioDelay</a>
-      <escape>Fullscreen</escape>
-      <c>Playlist</c>
-      <v>XBMC.ActivateWindow(Teletext)</v>
-      <up mod="ctrl">SubtitleShiftUp</up>
-      <down mod="ctrl">SubtitleShiftDown</down>
-      <pageup>SkipNext</pageup>
-      <pagedown>SkipPrevious</pagedown>
+      <music>AudioDelay</music>
+      <f2>AspectRatio</f2> 
+      <red>RunScript(script.xbmc.subtitles)</red>
+      <green>ActivateWindow(OSDVideoSettings)</green>
+      <yellow>ActivateWindow(OSDAudioSettings)</yellow>
+      <blue>ActivateWindow(VideoBookmarks)</blue>
+      <f1>ActivateWindow(VideoPlaylist)</f1>
+      <f7>SkipNext</f7>
+      <rewind>SkipPrevious</rewind>
     </keyboard>
   </FullscreenVideo>
   <VideoTimeSeek>
-    <keyboard>
-      <return>Select</return>
-      <enter>Select</enter>
+    <keyboard name="The Little Black Box Remote">
+      <select>Select</select>
     </keyboard>
   </VideoTimeSeek>
   <FullscreenInfo>
-    <keyboard>
-      <f>FastForward</f>
-      <r>Rewind</r>
-      <period>StepForward</period>
-      <o>CodecInfo</o>
-      <i>Back</i>
-      <d mod="ctrl">Back</d>
-      <m>OSD</m>
+    <keyboard name="The Little Black Box Remote">
+      <fastforward>FastForward</fastforward>
+      <f3>Rewind</f3>
+      <info_btn>Back</info_btn>
+      <menu>OSD</menu>
     </keyboard>
   </FullscreenInfo>
   <PlayerControls>
-    <keyboard>
-      <m>Back</m>
+    <keyboard name="The Little Black Box Remote">
+      <menu>Back</menu>
     </keyboard>
   </PlayerControls>
   <Visualisation>
-    <keyboard>
-      <f>FastForward</f>
-      <r>Rewind</r>
-      <period>SkipNext</period>
-      <comma>SkipPrevious</comma>
+    <keyboard name="The Little Black Box Remote">
+      <c>RunScript(special://xbmc/system/keymaps/tlbb/py_ispvr.py,"ActivateWindow(PVROSDChannels)","ActivateWindow(MusicPlaylist)")</c>
+      <fastforward>FastForward</fastforward>
+      <f3>Rewind</f3>
       <backspace>Fullscreen</backspace>
-      <return>OSD</return>
-      <enter>OSD</enter>
-      <m>OSD</m>
-      <i>Info</i>
-      <p>ActivateWindow(VisualisationPresetList)</p>
-      <v>ActivateWindow(VisualisationSettings)</v>
-      <n>ActivateWindow(MusicPlaylist)</n>
+      <select>OSD</select>
+      <menu>OSD</menu>
+      <info_btn>Info</info_btn>
       <left>SkipPrevious</left>
       <right>SkipNext</right>
-      <up>IncreaseRating</up>
-      <down>DecreaseRating</down>      <!--<back>NextPreset</back>!-->
-      <o>CodecInfo</o>
-      <l>LockPreset</l>
-      <escape>FullScreen</escape>
-      <g>XBMC.ActivateWindow(PVROSDGuide)</g>
-      <c>XBMC.ActivateWindow(PVROSDChannels)</c>
+      <up>RunScript(special://xbmc/system/keymaps/nyxboard/py_ispvr.py,"ActivateWindow(PVROSDChannels)","Action(IncreaseRating)")</up>
+      <down>RunScript(special://xbmc/system/keymaps/nyxboard/py_ispvr.py,"ActivateWindow(PVROSDChannels)","Action(DecreaseRating)")</down>
+      <red>RunScript(script.cu.lrclyrics)</red>
+      <green>RunScript(special://xbmc/system/keymaps/tlbb/py_activate_click.py,500)</green>
+      <yellow>Addon.Default.OpenSettings(xbmc.player.musicviz)</yellow>
+      <blue>ActivateWindow(VisualisationPresetList)</blue>
+      <f1>ActivateWindow(MusicPlaylist)</f1>
     </keyboard>
   </Visualisation>
   <MusicOSD>
-    <keyboard>
-      <f>FastForward</f>
-      <r>Rewind</r>
-      <period>SkipNext</period>
-      <comma>SkipPrevious</comma>
-      <m>Back</m>
-      <i>Info</i>
-      <o>CodecInfo</o>
-      <p>ActivateWindow(VisualisationPresetList)</p>
-      <v>ActivateWindow(VisualisationSettings)</v>
-      <n>ActivateWindow(MusicPlaylist)</n>
+    <keyboard name="The Little Black Box Remote">
+      <fastforward>FastForward</fastforward>
+      <f3>Rewind</f3>
+      <f7>SkipNext</f7>
+      <rewind>SkipPrevious</rewind>
+      <menu>Back</menu>
+      <info_btn>Info</info_btn>
+      <red>RunScript(script.cu.lrclyrics)</red>
+      <green>SendClick(500)</green>
+      <yellow>Addon.Default.OpenSettings(xbmc.player.musicviz)</yellow>
+      <blue>ActivateWindow(VisualisationPresetList)</blue>
+      <f1>ActivateWindow(MusicPlaylist)</f1>
     </keyboard>
   </MusicOSD>
   <VisualisationSettings>
-    <keyboard>
-      <f>FastForward</f>
-      <r>Rewind</r>
-      <period>SkipNext</period>
-      <comma>SkipPrevious</comma>
-      <m>Back</m>
-      <i>Info</i>
-      <o>CodecInfo</o>
-      <p>ActivateWindow(VisualisationPresetList)</p>
-      <v>Back</v>
-      <n>ActivateWindow(MusicPlaylist)</n>
+    <keyboard name="The Little Black Box Remote">
+      <fastforward>FastForward</fastforward>
+      <f3>Rewind</f3>
+      <f7>SkipNext</f7>
+      <rewind>SkipPrevious</rewind>
+      <menu>Back</menu>
+      <info_btn>Info</info_btn>
+      <f1>ActivateWindow(MusicPlaylist)</f1>
     </keyboard>
   </VisualisationSettings>
   <VisualisationPresetList>
-    <keyboard>
-      <f>FastForward</f>
-      <r>Rewind</r>
-      <period>SkipNext</period>
-      <comma>SkipPrevious</comma>
-      <m>Back</m>
-      <i>Info</i>
-      <o>CodecInfo</o>
-      <p>Back</p>
-      <v>Back</v>
-      <n>ActivateWindow(MusicPlaylist)</n>
+    <keyboard name="The Little Black Box Remote">
+      <fastforward>FastForward</fastforward>
+      <f3>Rewind</f3>
+      <f7>SkipNext</f7>
+      <rewind>SkipPrevious</rewind>
+      <menu>Back</menu>
+      <info_btn>Info</info_btn>
+      <blue>Close</blue>
+      <f1>ActivateWindow(MusicPlaylist)</f1>
     </keyboard>
   </VisualisationPresetList>
   <SlideShow>
-    <keyboard>
-      <zero>ZoomNormal</zero>
-      <one>ZoomLevel1</one>
-      <two>ZoomLevel2</two>
-      <three>ZoomLevel3</three>
-      <four>ZoomLevel4</four>
-      <five>ZoomLevel5</five>
-      <six>ZoomLevel6</six>
-      <seven>ZoomLevel7</seven>
-      <eight>ZoomLevel8</eight>
-      <nine>ZoomLevel9</nine>
-      <i>Info</i>
-      <o>CodecInfo</o>
-      <period>NextPicture</period>
-      <comma>PreviousPicture</comma>
-      <plus>ZoomIn</plus>
-      <minus>ZoomOut</minus>
-      <return>Rotate</return>
-      <enter>Rotate</enter>
-      <r>Rotate</r>
+    <keyboard name="The Little Black Box Remote">
+      <play_pause>Pause</play_pause>
+      <menu>ActivateWindow(PlayerControls)</menu>
+      <info_btn>Info</info_btn>
+      <pageup>ZoomIn</pageup>
+      <pagedown>ZoomOut</pagedown>
+      <select>Rotate</select>
+      <yellow>ActivateWindow(Favourites)</yellow>
     </keyboard>
   </SlideShow>
   <ScreenCalibration>
-    <keyboard>
-      <return>NextCalibration</return>
-      <enter>NextCalibration</enter>
-      <d>ResetCalibration</d>
-      <r>NextResolution</r>
+    <keyboard name="The Little Black Box Remote">
+      <select>NextCalibration</select>
+      <red>ResetCalibration</red> 
+      <yellow>NextResolution</yellow> 
     </keyboard>
   </ScreenCalibration>
   <GUICalibration>
-    <keyboard>
-      <return>NextCalibration</return>
-      <enter>NextCalibration</enter>
-      <d>ResetCalibration</d>
+    <keyboard name="The Little Black Box Remote">
+      <select>NextCalibration</select>
+      <red>ResetCalibration</red>
     </keyboard>
   </GUICalibration>
   <VideoOSD>
-    <keyboard>
-      <m>Back</m>
-      <g mod="ctrl">Back</g> <!-- MCE Guide button -->
-      <i>Info</i>
-      <o>CodecInfo</o>
+    <keyboard name="The Little Black Box Remote">
+      <menu>Back</menu>
+      <f1>ActivateWindow(VideoPlaylist)</f1>
+      <music>AudioDelay</music>
+      <f2>AspectRatio</f2>
+      <info_btn>Info</info_btn>
+      <red>RunScript(special://xbmc/system/keymaps/tlbb/py_ispvr.py,"ActivateWindow(Teletext)","RunScript(script.xbmc.subtitles)")</red>
+      <green>ActivateWindow(OSDVideoSettings)</green>
+      <yellow>ActivateWindow(OSDAudioSettings)</yellow>
+      <blue>RunScript(special://xbmc/system/keymaps/tlbb/py_ispvr.py,"PlayerControl(Record)","ActivateWindow(VideoBookmarks)")</blue>
     </keyboard>
   </VideoOSD>
   <VideoMenu>
-    <keyboard>
-      <opensquarebracket>BigStepForward</opensquarebracket>
-      <closesquarebracket>BigStepBack</closesquarebracket>
-      <m>OSD</m>
-      <i>Info</i>
-      <o>CodecInfo</o>
-      <z>AspectRatio</z>
-      <t>ShowSubtitles</t>
-      <l>NextSubtitle</l>
-      <a>AudioDelay</a>
-      <escape>Fullscreen</escape>
-      <return>Select</return>
-      <enter>Select</enter>      <!-- backspace>Fullscreen</backspace -->
-      <pageup>SkipNext</pageup>
-      <pagedown>SkipPrevious</pagedown>
+    <keyboard name="The Little Black Box Remote">
+      <play_pause>Select</play_pause>
+      <menu>OSD</menu>
+      <info_btn>Info</info_btn>
+      <music>AudioDelay</music>
+      <f2>AspectRatio</f2>
+      <red>RunScript(script.xbmc.subtitles)</red>
+      <green>ActivateWindow(OSDVideoSettings)</green>
+      <yellow>ActivateWindow(OSDAudioSettings)</yellow>
+      <blue>ActivateWindow(VideoBookmarks)</blue>
+      <backspace>Fullscreen</backspace>
+      <select>Select</select>
+      <f7>SkipNext</f7>
+      <rewind>SkipPrevious</rewind>
     </keyboard>
   </VideoMenu>
-  <OSDVideoSettings>
-    <keyboard>
-      <i>Info</i>
-      <o>CodecInfo</o>
+   <OSDVideoSettings>
+    <keyboard name="The Little Black Box Remote">
+      <info_btn>Info</info_btn>
+      <green>Close</green>
     </keyboard>
   </OSDVideoSettings>
   <OSDAudioSettings>
-    <keyboard>
-      <i>Info</i>
-      <o>CodecInfo</o>
+    <keyboard name="The Little Black Box Remote">
+       <info_btn>Info</info_btn>
+      <yellow>Close</yellow>
     </keyboard>
   </OSDAudioSettings>
   <VideoBookmarks>
-    <keyboard>
-      <delete>Delete</delete>
+    <keyboard name="The Little Black Box Remote">
+      <red>Delete</red>
+      <blue>Close</blue>
     </keyboard>
   </VideoBookmarks>
   <MyVideoLibrary>
-    <keyboard>
-      <delete>Delete</delete>
-      <space>Playlist</space>
-      <w>ToggleWatched</w>
+    <keyboard name="The Little Black Box Remote">
+      <settings_btn>ActivateWindow(VideosSettings)</settings_btn>
+      <pageup>PageUp</pageup>
+      <pagedown>PageDown</pagedown>
+      <red>Delete</red>
+      <green>Queue</green>
+      <yellow>ActivateWindow(Favourites)</yellow>
+      <zero>ActivateWindow(VideoPlaylist)</zero>
+      <nine>ToggleWatched</nine> 
     </keyboard>
   </MyVideoLibrary>
   <MyVideoFiles>
-    <keyboard>
-      <space>Playlist</space>
-      <q>Queue</q>
-      <w>ToggleWatched</w>
+    <keyboard name="The Little Black Box Remote">
+      <settings_btn>ActivateWindow(VideosSettings)</settings_btn>
+      <pageup>PageUp</pageup>
+      <pagedown>PageDown</pagedown>
+      <zero>ActivateWindow(VideoPlaylist)</zero>
+      <red>Delete</red>
+      <green>Queue</green>
+      <yellow>ActivateWindow(Favourites)</yellow>
+      <nine>ToggleWatched</nine> 
     </keyboard>
   </MyVideoFiles>
   <MyVideoPlaylist>
-    <keyboard>
-      <space>Back</space>
-      <delete>Delete</delete>
-      <u>MoveItemUp</u>
-      <d>MoveItemDown</d>
+    <keyboard name="The Little Black Box Remote">
+      <zero>Back</zero>
+      <pageup>MoveItemUp</pageup>
+      <pagedown>MoveItemDown</pagedown>
+      <red>Delete</red>
+      <yellow>ActivateWindow(Favourites)</yellow>
     </keyboard>
   </MyVideoPlaylist>
+  <VideosSettings>
+    <keyboard name="The Little Black Box Remote">
+      <settings_btn>Back</settings_btn>
+    </keyboard>
+  </VideosSettings>
   <MyPictures>
-    <keyboard>
-      <delete>Delete</delete>
+    <keyboard name="The Little Black Box Remote">
+      <settings_btn>ActivateWindow(PicturesSettings)</settings_btn>
+      <pageup>PageUp</pageup>
+      <pagedown>PageDown</pagedown>
+      <red>Delete</red>
+      <yellow>ActivateWindow(Favourites)</yellow>
     </keyboard>
   </MyPictures>
+  <PicturesSettings>
+    <keyboard name="The Little Black Box Remote">
+      <settings_btn>Back</settings_btn>
+    </keyboard>
+  </PicturesSettings>
   <ContextMenu>
-    <keyboard>
-      <c>Back</c>
+    <keyboard name="The Little Black Box Remote">
       <menu>Back</menu>
     </keyboard>
   </ContextMenu>
   <Scripts>
-    <keyboard>
-      <i>info</i>
+    <keyboard name="The Little Black Box Remote">
+      <info_btn>Info</info_btn>
+      <yellow>ActivateWindow(Favourites)</yellow>
     </keyboard>
   </Scripts>
   <MusicInformation>
-    <keyboard>
-      <i>Back</i>
-      <d mod="ctrl">Back</d>
+    <keyboard name="The Little Black Box Remote">
+      <info_btn>Back</info_btn>
     </keyboard>
   </MusicInformation>
   <MovieInformation>
-    <keyboard>
-      <i>Back</i>
+    <keyboard name="The Little Black Box Remote">
+      <info_btn>Back</info_btn>
     </keyboard>
   </MovieInformation>
   <PictureInfo>
-    <keyboard>
-      <period>NextPicture</period>
-      <comma>PreviousPicture</comma>
-      <i>Back</i>
-      <d mod="ctrl">Back</d>
-      <o>Back</o>
-      <space>Pause</space>
+    <keyboard name="The Little Black Box Remote">
+      <play_pause>Pause</play_pause>
+      <pageup>NextPicture</pageup>
+      <pagedown>PreviousPicture</pagedown>
+      <info_btn>Back</info_btn>
     </keyboard>
   </PictureInfo>
   <Teletext>
-    <keyboard>
-      <v>Back</v>
+    <keyboard name="The Little Black Box Remote">
+      <red>Close</red>
     </keyboard>
   </Teletext>
   <Favourites>
-    <keyboard>
-      <backspace>Close</backspace>
+    <keyboard name="The Little Black Box Remote">
+      <pageup>MoveItemUp</pageup>
+      <pagedown>MoveItemDown</pagedown>
+      <red>Delete</red>
+      <yellow>Close</yellow>
     </keyboard>
   </Favourites>
   <NumericInput>
-    <keyboard>
+    <keyboard name="The Little Black Box Remote">
       <backspace>Close</backspace>
     </keyboard>
   </NumericInput>
   <FullscreenLiveTV>
-    <keyboard>
-      <left>PreviousChannelGroup</left>
-      <right>NextChannelGroup</right>
-      <up>ChannelUp</up>
-      <down>ChannelDown</down>
+    <keyboard name="The Little Black Box Remote">
+      <menu>OSD</menu>
+      <left>StepBack</left>
+      <right>StepForward</right>
+      <up>ActivateWindow(PVROSDChannels)</up>
+      <down>ActivateWindow(PVROSDChannels)</down>
+      <pageup>ChannelUp</pageup>
+      <pagedown>ChannelDown</pagedown>
+      <music>AudioDelay</music>
+      <f2>AspectRatio</f2>
+      <red>ActivateWindow(Teletext)</red>
+      <green>ActivateWindow(OSDVideoSettings)</green>
+      <yellow>ActivateWindow(OSDAudioSettings)</yellow>
+      <blue>PlayerControl(Record)</blue>
     </keyboard>
   </FullscreenLiveTV>
+  <MyPVR>
+    <keyboard name="The Little Black Box Remote">
+      <settings_btn>ActivateWindow(PVRSettings)</settings_btn>
+      <pageup>ChannelUp</pageup>
+      <pagedown>ChannelDown</pagedown>
+      <red>Delete</red>
+      <yellow>ActivateWindow(Favourites)</yellow>
+    </keyboard>
+  </MyPVR>
   <PVROSDChannels>
-    <keyboard>
+    <keyboard name="The Little Black Box Remote">
       <backspace>Close</backspace>
-      <escape>Close</escape>
-      <c>Close</c>
+      <select>RunScript(special://xbmc/system/keymaps/tlbb/py_select_close.py)</select>
+      <pageup>ChannelUp</pageup>
+      <pagedown>ChannelDown</pagedown>
     </keyboard>
   </PVROSDChannels>
   <PVROSDGuide>
-    <keyboard>
+    <keyboard name="The Little Black Box Remote">
       <backspace>Close</backspace>
-      <escape>Close</escape>
+      <pageup>PageUp</pageup>
+      <pagedown>PageDown</pagedown>
+      <info_btn>Select</info_btn>
     </keyboard>
   </PVROSDGuide>
-  <PVROSDDirector>
-    <keyboard>
+  <PVRGuideInfo>
+    <keyboard name="The Little Black Box Remote">
       <backspace>Close</backspace>
-      <escape>Close</escape>
+      <info_btn>Close</info_btn>
+    </keyboard>
+  </PVRGuideInfo>
+  <PVROSDDirector>
+    <keyboard name="The Little Black Box Remote">
+      <backspace>Close</backspace>
     </keyboard>
   </PVROSDDirector>
   <PVROSDCutter>
-    <keyboard>
+    <keyboard name="The Little Black Box Remote">
       <backspace>Close</backspace>
-      <escape>Close</escape>
     </keyboard>
   </PVROSDCutter>
   <MyTVSettings>
-    <keyboard>
+    <keyboard name="The Little Black Box Remote">
       <backspace>PreviousMenu</backspace>
     </keyboard>
   </MyTVSettings>
   <FileBrowser>
-    <keyboard>
-      <space>Highlight</space>
+    <keyboard name="The Little Black Box Remote">
+      <pageup>PageUp</pageup>
+      <pagedown>PageDown</pagedown>
+      <red>Delete</red>
+      <green>Highlight</green>
+      <yellow>ActivateWindow(Favourites)</yellow>
     </keyboard>
   </FileBrowser>
   <ShutdownMenu>
-    <keyboard>
-      <s>Back</s>
+    <keyboard name="The Little Black Box Remote">
+      <backspace>Close</backspace>
     </keyboard>
   </ShutdownMenu>
   <AddonInformation>
-    <keyboard>
-      <i>Back</i>
+    <keyboard name="The Little Black Box Remote">
+      <info_btn>Back</info_btn>
     </keyboard>
   </AddonInformation>
   <AddonSettings>
-    <keyboard>
-      <delete>Delete</delete>
+    <keyboard name="The Little Black Box Remote">
+      <red>Delete</red>
     </keyboard>
   </AddonSettings>
+  <Weather>
+    <keyboard name="The Little Black Box Remote">
+      <settings_btn>ActivateWindow(WeatherSettings)</settings_btn>
+      <yellow>ActivateWindow(Favourites)</yellow>
+    </keyboard>
+  </Weather>
+  <WeatherSettings>
+    <keyboard name="The Little Black Box Remote">
+      <settings_btn>Back</settings_btn>
+    </keyboard>
+  </WeatherSettings>
 </keymap>
+

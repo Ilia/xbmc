@@ -228,6 +228,12 @@ static const XBMCKEYTABLE XBMCKeyTable[] =
 , { XBMCK_GREEN,                  0,    0, XBMCVK_GREEN,         "green" }
 , { XBMCK_YELLOW,                 0,    0, XBMCVK_YELLOW,        "yellow" }
 , { XBMCK_BLUE,                   0,    0, XBMCVK_BLUE,          "blue" }
+, { XBMCK_MUSIC,                  0,    0, XBMCVK_MUSIC,         "music" }
+, { XBMCK_MOVIES,                 0,    0, XBMCVK_MOVIES,        "movies" }
+, { XBMCK_SERIES,                 0,    0, XBMCVK_SERIES,        "series" }
+, { XBMCK_REWIND,                 0,    0, XBMCVK_REWIND,        "rewind" }
+, { XBMCK_HELP,                   0,    0, XBMCVK_HELP,          "help" }
+, { XBMCK_FASTFORWARD,            0,    0, XBMCVK_FASTFORWARD,   "fastforward" }
 };
 
 static int XBMCKeyTableSize = sizeof(XBMCKeyTable)/sizeof(XBMCKEYTABLE);

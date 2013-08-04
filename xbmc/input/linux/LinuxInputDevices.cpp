@@ -266,6 +266,12 @@ KeyMap keyMap[] = {
   { 378               , XBMCK_GREEN       },
   { 381               , XBMCK_YELLOW      },
   { 366               , XBMCK_BLUE        },
+  { 419               , XBMCK_FASTFORWARD },
+  { 418               , XBMCK_MENU        },
+  { 150               , XBMCK_MUSIC       },
+  { 226               , XBMCK_MOVIES      },
+  { 376               , XBMCK_SERIES      },
+  { 159               , XBMCK_MEDIA_PLAY_PAUSE},
 };
 
 /*
