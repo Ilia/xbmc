@@ -38,7 +38,7 @@
       <eight>Number8</eight>										<!-- Button 34 : 8 -->
       <nine>Number9</nine>										<!-- Button 35 : 9 -->
       <series>ActivateWindow(Videos,TvShowTitles)</series>							<!-- Button 36 : series -->
-      <info_btn>Info</info_btn>										<!-- Button 37 : info -->
+      <help>Info</help>										<!-- Button 37 : info -->
       <zero>Number0</zero>										<!-- Button 38 : 0 -->
       <backspace>Back</backspace>										<!-- Button 39 : back -->
       <f2>ActivateWindow(Pictures)</f2> 						<!-- Button 40 : pictures -->
@@ -55,7 +55,7 @@
   </LoginScreen>
   <Home>
     <keyboard name="The Little Black Box Remote">
-      <info_btn>Info</info_btn>
+      <help>Info</help>
       <f4>FullScreen</f4>
       <f1>Playlist</f1>
       <zero>Playlist</zero>
@@ -138,7 +138,7 @@
       <backspace>Fullscreen</backspace>
       <select>OSD</select>
       <menu>OSD</menu>
-      <info_btn>Info</info_btn>
+      <help>Info</help>
       <left>StepBack</left>
       <right>StepForward</right>
       <up>BigStepForward</up>
@@ -163,7 +163,7 @@
     <keyboard name="The Little Black Box Remote">
       <fastforward>FastForward</fastforward>
       <f3>Rewind</f3>
-      <info_btn>Back</info_btn>
+      <help>Back</help>
       <menu>OSD</menu>
     </keyboard>
   </FullscreenInfo>
@@ -180,7 +180,7 @@
       <backspace>Fullscreen</backspace>
       <select>OSD</select>
       <menu>OSD</menu>
-      <info_btn>Info</info_btn>
+      <help>Info</help>
       <left>SkipPrevious</left>
       <right>SkipNext</right>
       <up>RunScript(special://xbmc/system/keymaps/nyxboard/py_ispvr.py,"ActivateWindow(PVROSDChannels)","Action(IncreaseRating)")</up>
@@ -199,7 +199,7 @@
       <f7>SkipNext</f7>
       <rewind>SkipPrevious</rewind>
       <menu>Back</menu>
-      <info_btn>Info</info_btn>
+      <help>Info</help>
       <red>RunScript(script.cu.lrclyrics)</red>
       <green>SendClick(500)</green>
       <yellow>Addon.Default.OpenSettings(xbmc.player.musicviz)</yellow>
@@ -214,7 +214,7 @@
       <f7>SkipNext</f7>
       <rewind>SkipPrevious</rewind>
       <menu>Back</menu>
-      <info_btn>Info</info_btn>
+      <help>Info</help>
       <f1>ActivateWindow(MusicPlaylist)</f1>
     </keyboard>
   </VisualisationSettings>
@@ -225,7 +225,7 @@
       <f7>SkipNext</f7>
       <rewind>SkipPrevious</rewind>
       <menu>Back</menu>
-      <info_btn>Info</info_btn>
+      <help>Info</help>
       <blue>Close</blue>
       <f1>ActivateWindow(MusicPlaylist)</f1>
     </keyboard>
@@ -234,7 +234,7 @@
     <keyboard name="The Little Black Box Remote">
       <play_pause>Pause</play_pause>
       <menu>ActivateWindow(PlayerControls)</menu>
-      <info_btn>Info</info_btn>
+      <help>Info</help>
       <pageup>ZoomIn</pageup>
       <pagedown>ZoomOut</pagedown>
       <select>Rotate</select>
@@ -260,7 +260,7 @@
       <f1>ActivateWindow(VideoPlaylist)</f1>
       <music>AudioDelay</music>
       <f2>AspectRatio</f2>
-      <info_btn>Info</info_btn>
+      <help>Info</help>
       <red>RunScript(special://xbmc/system/keymaps/tlbb/py_ispvr.py,"ActivateWindow(Teletext)","RunScript(script.xbmc.subtitles)")</red>
       <green>ActivateWindow(OSDVideoSettings)</green>
       <yellow>ActivateWindow(OSDAudioSettings)</yellow>
@@ -271,7 +271,7 @@
     <keyboard name="The Little Black Box Remote">
       <play_pause>Select</play_pause>
       <menu>OSD</menu>
-      <info_btn>Info</info_btn>
+      <help>Info</help>
       <music>AudioDelay</music>
       <f2>AspectRatio</f2>
       <red>RunScript(script.xbmc.subtitles)</red>
@@ -286,13 +286,13 @@
   </VideoMenu>
    <OSDVideoSettings>
     <keyboard name="The Little Black Box Remote">
-      <info_btn>Info</info_btn>
+      <help>Info</help>
       <green>Close</green>
     </keyboard>
   </OSDVideoSettings>
   <OSDAudioSettings>
     <keyboard name="The Little Black Box Remote">
-       <info_btn>Info</info_btn>
+       <help>Info</help>
       <yellow>Close</yellow>
     </keyboard>
   </OSDAudioSettings>
@@ -361,18 +361,18 @@
   </ContextMenu>
   <Scripts>
     <keyboard name="The Little Black Box Remote">
-      <info_btn>Info</info_btn>
+      <help>Info</help>
       <yellow>ActivateWindow(Favourites)</yellow>
     </keyboard>
   </Scripts>
   <MusicInformation>
     <keyboard name="The Little Black Box Remote">
-      <info_btn>Back</info_btn>
+      <help>Back</help>
     </keyboard>
   </MusicInformation>
   <MovieInformation>
     <keyboard name="The Little Black Box Remote">
-      <info_btn>Back</info_btn>
+      <help>Back</help>
     </keyboard>
   </MovieInformation>
   <PictureInfo>
@@ -380,7 +380,7 @@
       <play_pause>Pause</play_pause>
       <pageup>NextPicture</pageup>
       <pagedown>PreviousPicture</pagedown>
-      <info_btn>Back</info_btn>
+      <help>Back</help>
     </keyboard>
   </PictureInfo>
   <Teletext>
@@ -440,13 +440,13 @@
       <backspace>Close</backspace>
       <pageup>PageUp</pageup>
       <pagedown>PageDown</pagedown>
-      <info_btn>Select</info_btn>
+      <help>Select</help>
     </keyboard>
   </PVROSDGuide>
   <PVRGuideInfo>
     <keyboard name="The Little Black Box Remote">
       <backspace>Close</backspace>
-      <info_btn>Close</info_btn>
+      <help>Close</help>
     </keyboard>
   </PVRGuideInfo>
   <PVROSDDirector>
@@ -480,7 +480,7 @@
   </ShutdownMenu>
   <AddonInformation>
     <keyboard name="The Little Black Box Remote">
-      <info_btn>Back</info_btn>
+      <help>Back</help>
     </keyboard>
   </AddonInformation>
   <AddonSettings>
