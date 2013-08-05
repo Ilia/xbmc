@@ -272,6 +272,7 @@ KeyMap keyMap[] = {
   { 226               , XBMCK_MOVIES      },
   { 376               , XBMCK_SERIES      },
   { 159               , XBMCK_MEDIA_PLAY_PAUSE},
+  { 362               , XBMCK_SETTINGS	  },
 };
 
 /*

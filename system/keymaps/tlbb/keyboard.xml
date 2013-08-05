@@ -13,7 +13,7 @@
       <fastforward>FastForward</fastforward>							<!-- Button 09 : >> -->
       <menu>ContextMenu</menu>									<!-- Button 10 : menu -->
       <!-- <>mouse on/off</> -->									<!-- Button 11 : mouse (not available for keycode) -->
-      <settings_btn>ActivateWindow(Settings)</settings_btn>						<!-- Button 12 : settings/wheel -->
+      <settings>ActivateWindow(Settings)</settings>						<!-- Button 12 : settings/wheel -->
       <backspace>Back</backspace>									<!-- Button 13 : back -->
       <up>Up</up>										<!-- Button 14 : up -->
       <left>Left</left>										<!-- Button 15 : left -->
@@ -69,7 +69,7 @@
   </Programs>
   <Settings>
     <keyboard name="The Little Black Box Remote">
-      <settings_btn>Back</settings_btn>
+      <settings>Back</settings>
       <yellow>ActivateWindow(Favourites)</yellow>
     </keyboard>
   </Settings>
@@ -106,7 +106,7 @@
   </MyMusicPlaylistEditor>
   <MyMusicFiles>
     <keyboard name="The Little Black Box Remote">
-      <settings_btn>ActivateWindow(MusicSettings)</settings_btn>
+      <settings>ActivateWindow(MusicSettings)</settings>
       <pageup>PageUp</pageup>
       <pagedown>PageDown</pagedown>
       <zero>ActivateWindow(MusicPlaylist)</zero>
@@ -117,7 +117,7 @@
   </MyMusicFiles>
   <MyMusicLibrary>
     <keyboard name="The Little Black Box Remote">
-      <settings_btn>ActivateWindow(MusicSettings)</settings_btn>
+      <settings>ActivateWindow(MusicSettings)</settings>
       <pageup>PageUp</pageup>
       <pagedown>PageDown</pagedown>
       <zero>ActivateWindow(MusicPlaylist)</zero>
@@ -128,7 +128,7 @@
   </MyMusicLibrary>
   <MusicSettings>
     <keyboard name="The Little Black Box Remote">
-      <settings_btn>Back</settings_btn>
+      <settings>Back</settings>
     </keyboard>
   </MusicSettings>
  <FullscreenVideo>
@@ -304,7 +304,7 @@
   </VideoBookmarks>
   <MyVideoLibrary>
     <keyboard name="The Little Black Box Remote">
-      <settings_btn>ActivateWindow(VideosSettings)</settings_btn>
+      <settings>ActivateWindow(VideosSettings)</settings>
       <pageup>PageUp</pageup>
       <pagedown>PageDown</pagedown>
       <red>Delete</red>
@@ -316,7 +316,7 @@
   </MyVideoLibrary>
   <MyVideoFiles>
     <keyboard name="The Little Black Box Remote">
-      <settings_btn>ActivateWindow(VideosSettings)</settings_btn>
+      <settings>ActivateWindow(VideosSettings)</settings>
       <pageup>PageUp</pageup>
       <pagedown>PageDown</pagedown>
       <zero>ActivateWindow(VideoPlaylist)</zero>
@@ -337,12 +337,12 @@
   </MyVideoPlaylist>
   <VideosSettings>
     <keyboard name="The Little Black Box Remote">
-      <settings_btn>Back</settings_btn>
+      <settings>Back</settings>
     </keyboard>
   </VideosSettings>
   <MyPictures>
     <keyboard name="The Little Black Box Remote">
-      <settings_btn>ActivateWindow(PicturesSettings)</settings_btn>
+      <settings>ActivateWindow(PicturesSettings)</settings>
       <pageup>PageUp</pageup>
       <pagedown>PageDown</pagedown>
       <red>Delete</red>
@@ -351,7 +351,7 @@
   </MyPictures>
   <PicturesSettings>
     <keyboard name="The Little Black Box Remote">
-      <settings_btn>Back</settings_btn>
+      <settings>Back</settings>
     </keyboard>
   </PicturesSettings>
   <ContextMenu>
@@ -420,7 +420,7 @@
   </FullscreenLiveTV>
   <MyPVR>
     <keyboard name="The Little Black Box Remote">
-      <settings_btn>ActivateWindow(PVRSettings)</settings_btn>
+      <settings>ActivateWindow(PVRSettings)</settings>
       <pageup>ChannelUp</pageup>
       <pagedown>ChannelDown</pagedown>
       <red>Delete</red>
@@ -490,13 +490,13 @@
   </AddonSettings>
   <Weather>
     <keyboard name="The Little Black Box Remote">
-      <settings_btn>ActivateWindow(WeatherSettings)</settings_btn>
+      <settings>ActivateWindow(WeatherSettings)</settings>
       <yellow>ActivateWindow(Favourites)</yellow>
     </keyboard>
   </Weather>
   <WeatherSettings>
     <keyboard name="The Little Black Box Remote">
-      <settings_btn>Back</settings_btn>
+      <settings>Back</settings>
     </keyboard>
   </WeatherSettings>
 </keymap>

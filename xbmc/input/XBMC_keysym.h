@@ -235,6 +235,7 @@ typedef enum {
   XBMCK_MUSIC             = 354,
   XBMCK_MOVIES            = 355,
   XBMCK_SERIES            = 356,
+  XBMCK_SETTINGS          = 357,
 
   XBMCK_LAST
 } XBMCKey;

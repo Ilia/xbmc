@@ -217,6 +217,7 @@ typedef enum {
   XBMCVK_MOVIES         = 0XE7,
   XBMCVK_SERIES         = 0XE8,
   XBMCVK_FASTFORWARD    = 0XE9,
+  XBMCVK_SETTINGS       = 0XEA,
 
   XBMCVK_LAST           = 0xFF
 } XBMCVKey;

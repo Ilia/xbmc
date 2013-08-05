@@ -234,6 +234,7 @@ static const XBMCKEYTABLE XBMCKeyTable[] =
 , { XBMCK_REWIND,                 0,    0, XBMCVK_REWIND,        "rewind" }
 , { XBMCK_HELP,                   0,    0, XBMCVK_HELP,          "help" }
 , { XBMCK_FASTFORWARD,            0,    0, XBMCVK_FASTFORWARD,   "fastforward" }
+, { XBMCK_SETTINGS,               0,    0, XBMCVK_SETTINGS,      "settings" }
 };
 
 static int XBMCKeyTableSize = sizeof(XBMCKeyTable)/sizeof(XBMCKEYTABLE);
