@@ -14,7 +14,7 @@
       <menu>ContextMenu</menu>									<!-- Button 10 : menu -->
       <!-- <>mouse on/off</> -->									<!-- Button 11 : mouse (not available for keycode) -->
       <settings>ActivateWindow(Settings)</settings>						<!-- Button 12 : settings/wheel -->
-      <backspace>Back</backspace>									<!-- Button 13 : back -->
+      <esc>Back</esc>									<!-- Button 13 : back -->
       <up>Up</up>										<!-- Button 14 : up -->
       <left>Left</left>										<!-- Button 15 : left -->
       <select>Select</select>									<!-- Button 16 : OK -->
