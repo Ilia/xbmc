@@ -11,7 +11,7 @@
       <f3>Rewind</f3>							<!-- Button 07 : << -->
       <f8>Stop</f8>							<!-- Button 08 : stop -->
       <fastforward>FastForward</fastforward>				<!-- Button 09 : >> -->
-      <menu></menu>						<!-- Button 10 : menu -->
+      <menu>ActivateWindow(PlayerControls)</menu>			<!-- Button 10 : menu -->
       <!-- <>mouse on/off</> -->					<!-- Button 11 : mouse (not available for keycode) -->
       <settings>ActivateWindow(Settings)</settings>			<!-- Button 12 : settings/wheel -->
       <escape>Back</escape>					<!-- Button 13 : back -->
