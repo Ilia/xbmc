@@ -1,7 +1,6 @@
 import urllib,urllib2,sys,re,xbmcplugin,xbmcgui,xbmcaddon,xbmc,os
 import datetime
 import time
-import jsonrpclib
 
 ADDON = xbmcaddon.Addon(id='plugin.video.urlinstaller')
 
