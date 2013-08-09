@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!-- Translated using Transifex web application. For support, or if you would like to to help out, please visit your language team! -->
+<!-- Croatian language-Team URL: http://www.transifex.com/projects/p/xbmc-addons/language/hr/ -->
+<!-- Report language file syntax bugs at: alanwww1@xbmc.org -->
+
+<strings>
+    <string id="30011">Općenito</string>
+    <string id="30023">Način</string>
+    <string id="30032">Baza Podataka</string>
+    <string id="30033">Lista izvedbi</string>
+    <string id="30065">Nedjelja</string>
+    <string id="30066">Ponedjeljak</string>
+    <string id="30067">Utorak</string>
+    <string id="30068">Srijeda</string>
+    <string id="30069">Četvrtak</string>
+    <string id="30070">Petak</string>
+    <string id="30071">Subota</string>
+</strings>
