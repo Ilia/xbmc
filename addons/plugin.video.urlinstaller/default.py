@@ -1,26 +1,66 @@
 import urllib,urllib2,sys,re,xbmcplugin,xbmcgui,xbmcaddon,xbmc,os
 import datetime
 import time
+import jsonrpclib
 
 ADDON = xbmcaddon.Addon(id='plugin.video.urlinstaller')
 
 
+def loglocation(): 
+    versionNumber = int(xbmc.getInfoLabel("System.BuildVersion" )[0:2])
+    if versionNumber < 12:
+        if xbmc.getCondVisibility('system.platform.osx'):
+            if xbmc.getCondVisibility('system.platform.atv2'):
+                log_path = '/var/mobile/Library/Preferences'
+            else:
+                log_path = os.path.join(os.path.expanduser('~'), 'Library/Logs')
+        elif xbmc.getCondVisibility('system.platform.ios'):
+            log_path = '/var/mobile/Library/Preferences'
+        elif xbmc.getCondVisibility('system.platform.windows'):
+            log_path = xbmc.translatePath('special://home')
+            log = os.path.join(log_path, 'xbmc.log')
+        elif xbmc.getCondVisibility('system.platform.linux'):
+            log_path = xbmc.translatePath('special://home/temp')
+        else:
+            log_path = xbmc.translatePath('special://logpath')
+    elif versionNumber > 11:
+        log_path = xbmc.translatePath('special://logpath')
+        log = os.path.join(log_path, 'xbmc.log')
+    return log_path
+
 
 def CATEGORIES():
-    dialog = xbmcgui.Dialog()
-    import time
-    url      =  SEARCH()
-    path         =  xbmc.translatePath(os.path.join('special://home/addons','packages'))
-    lib          =  os.path.join(path, 'my_url_installer.zip')
-    addonfolder  =  xbmc.translatePath(os.path.join('special://home/addons',''))
+    log_path=loglocation()
+    log = os.path.join(log_path, 'xbmc.log')
+    logfile=open(log, 'r').read()
     
-    DownloaderClass(url,lib)
-    time.sleep(3)
-    xbmc.executebuiltin("XBMC.Extract(%s,%s)" %(lib,addonfolder))
-    dialog.ok("URl Installer", "All Done","Next Time You Reboot Will Take Effect", "[COLOR yellow]Brought To You By XBMCHUB.COM[/COLOR]")
+    if 'JSONRPC: Incoming request: {"jsonrpc": "2.0","id": 0,"method": "Addons.ExecuteAddon","params": {"addonid": "plugin.video.urlinstaller"' in logfile:
+        match=re.compile('"params": {"mode": "2","url": "(.+?)"').findall(logfile)
+        dialog = xbmcgui.Dialog()
+        import time
+        path         =  xbmc.translatePath(os.path.join('special://home/addons','packages'))
+        lib          =  os.path.join(path, 'my_url_installer.zip')
+        addonfolder  =  xbmc.translatePath(os.path.join('special://home/addons',''))
+        DownloaderClass(match[0],lib)
+        time.sleep(3)
+        xbmc.executebuiltin("XBMC.Extract(%s,%s)" %(lib,addonfolder))
+        dialog.ok("URl Installer", "All Done","Next Time You Reboot Will Take Effect", "[COLOR yellow]Brought To You By XBMCHUB.COM[/COLOR]")
+    else:
+	    
+        dialog = xbmcgui.Dialog()
+        import time
+        url      =  SEARCH()
+        path         =  xbmc.translatePath(os.path.join('special://home/addons','packages'))
+        lib          =  os.path.join(path, 'my_url_installer.zip')
+        addonfolder  =  xbmc.translatePath(os.path.join('special://home/addons',''))
+        
+        DownloaderClass(url,lib)
+        time.sleep(3)
+        xbmc.executebuiltin("XBMC.Extract(%s,%s)" %(lib,addonfolder))
+        dialog.ok("URl Installer", "All Done","Next Time You Reboot Will Take Effect", "[COLOR yellow]Brought To You By XBMCHUB.COM[/COLOR]")
 	        
 def SEARCH():
-        search_entered = 'http://is.gd/'
+        search_entered = 'http://'
         keyboard = xbmc.Keyboard(search_entered, 'Please Enter Url For Install')
         keyboard.doModal()
         if keyboard.isConfirmed():
@@ -28,6 +68,18 @@ def SEARCH():
             if search_entered == None:
                 return False          
         return search_entered    
+        
+        
+def Remote(url):
+    dialog = xbmcgui.Dialog()
+    import time
+    path         =  xbmc.translatePath(os.path.join('special://home/addons','packages'))
+    lib          =  os.path.join(path, 'my_url_installer.zip')
+    addonfolder  =  xbmc.translatePath(os.path.join('special://home/addons',''))
+    DownloaderClass(url,lib)
+    time.sleep(3)
+    xbmc.executebuiltin("XBMC.Extract(%s,%s)" %(lib,addonfolder))
+    dialog.ok("URl Installer", "All Done","Next Time You Reboot Will Take Effect", "[COLOR yellow]Brought To You By XBMCHUB.COM[/COLOR]")
  
 def OPEN_URL(url):
     req = urllib2.Request(url, headers={'User-Agent' : "Magic Browser"}) 
@@ -109,6 +161,9 @@ print "IconImage: "+str(iconimage)
 #these are the modes which tells the plugin where to go
 if mode==None or url==None or len(url)<1:
         CATEGORIES()
+        
+if mode==2:
+        Remote(url)
        
        
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
