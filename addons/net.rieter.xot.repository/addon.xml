@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="net.rieter.xot.repository"
+		name="XOT-Uzg.v3 Add-ons"
+		version="1.0.1"
+		provider-name="Bas Rieter">
+	<extension point="xbmc.addon.repository"
+		name="Official XOT-UZg.v3 Add-on Repository">
+		<info compressed="false">http://www.rieter.net/net.rieter.xot.repository/addons.xml</info>		
+		<checksum>http://www.rieter.net/net.rieter.xot.repository/addons.xml.md5</checksum>
+		<datadir zip="true">http://www.rieter.net/net.rieter.xot.repository</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Install XOT-UZg.v3 from Rieter.NET</summary>
+		<description>This repository allows you to install the most recent version of XOT-Uzg.v3 script and plugin. They are now included in a single download.</description>
+		<disclaimer></disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
