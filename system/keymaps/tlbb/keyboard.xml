@@ -14,32 +14,17 @@
       <menu>ActivateWindow(PlayerControls)</menu>			<!-- Button 10 : menu -->
       <!-- <>mouse on/off</> -->					<!-- Button 11 : mouse (not available for keycode) -->
       <settings>ActivateWindow(Settings)</settings>			<!-- Button 12 : settings/wheel -->
-      <escape>Back</escape>					<!-- Button 13 : back -->
-      <up>Up</up>							<!-- Button 14 : up -->
-      <left>Left</left>							<!-- Button 15 : left -->
-      <select>Select</select>						<!-- Button 16 : OK -->
-      <right>Right</right>						<!-- Button 17 : right -->
-      <down>Down</down>							<!-- Button 18 : down -->
+      <escape>Back</escape>						<!-- Button 13 : back -->
       <f12>VolumeUp</f12>						<!-- Button 19 : vol+ -->
       <f11>VolumeDown</f11>						<!-- Button 20 : vol- -->
       <pageup>PageUp</pageup>  						<!-- Button 21 : pg+ -->
       <pagedown>PageDown</pagedown>					<!-- Button 22 : pg- -->
-      <f4>ActivateWindow(Home)</f4>					<!-- Button 23 : home -->
+<!--      <f4>ActivateWindow(Home)</f4>					<!-- Button 23 : home -->
       <f1>ContextMenu</f1>						<!-- Button 24 : = -->
-      <one>Number1</one>						<!-- Button 25 : 1 -->
-      <two>Number2</two>						<!-- Button 26 : 2 -->
-      <three>Number3</three>						<!-- Button 27 : 3 -->
       <music>ActivateWindow(Music)</music>				<!-- Button 28 : music -->
-      <four>Number4</four>						<!-- Button 29 : 4 -->
-      <five>Number5</five>						<!-- Button 30 : 5 -->
-      <six>Number6</six>						<!-- Button 31 : 6 -->
       <movies>ActivateWindow(Videos,MovieTitles)</movies>		<!-- Button 32 : movies -->
-      <seven>Number7</seven>						<!-- Button 33 : 7 -->
-      <eight>Number8</eight>						<!-- Button 34 : 8 -->
-      <nine>Number9</nine>						<!-- Button 35 : 9 -->
       <series>ActivateWindow(Videos,TvShowTitles)</series>		<!-- Button 36 : series -->
       <help>Info</help>							<!-- Button 37 : info -->
-      <zero>Number0</zero>						<!-- Button 38 : 0 -->
       <backspace>Back</backspace>					<!-- Button 39 : back -->
       <f2>ActivateWindow(Pictures)</f2> 				<!-- Button 40 : pictures -->
       <red>Close</red>  						<!-- Button 41 : red -->
@@ -56,7 +41,7 @@
   <Home>
     <keyboard name="The Little Black Box Remote">
       <help>ActivateWindow(SystemInfo)</help>
-      <f4>FullScreen</f4>
+      <!--<f4>FullScreen</f4>-->
       <f1>Playlist</f1>
       <zero>Playlist</zero>
       <yellow>ActivateWindow(Favourites)</yellow>
@@ -90,8 +75,6 @@
   </VirtualKeyboard>
   <MyFiles>
     <keyboard name="The Little Black Box Remote">
-      <pageup>PageUp</pageup>
-      <pagedown>PageDown</pagedown>
       <red>Delete</red>
       <green>Highlight</green>
       <yellow>ActivateWindow(Favourites)</yellow>
@@ -120,8 +103,6 @@
   <MyMusicFiles>
     <keyboard name="The Little Black Box Remote">
       <settings>ActivateWindow(MusicSettings)</settings>
-      <pageup>PageUp</pageup>
-      <pagedown>PageDown</pagedown>
       <zero>ActivateWindow(MusicPlaylist)</zero>
       <red>Delete</red>
       <green>Queue</green>
@@ -132,8 +113,6 @@
   <MyMusicLibrary>
     <keyboard name="The Little Black Box Remote">
       <settings>ActivateWindow(MusicSettings)</settings>
-      <pageup>PageUp</pageup>
-      <pagedown>PageDown</pagedown>
       <zero>ActivateWindow(MusicPlaylist)</zero>
       <red>Delete</red>
       <green>Queue</green>
@@ -253,21 +232,21 @@
       <help>CodecInfo</help>
       <pageup>ZoomIn</pageup>
       <pagedown>ZoomOut</pagedown>
-      <select>Rotate</select>
+      <return>Rotate</return>
       <yellow>ActivateWindow(Favourites)</yellow>
 	  <blue>ActivateWindow(Videos,Video Add-ons)</blue>
     </keyboard>
   </SlideShow>
   <ScreenCalibration>
     <keyboard name="The Little Black Box Remote">
-      <select>NextCalibration</select>
+      <return>NextCalibration</return>
       <red>ResetCalibration</red> 
       <yellow>NextResolution</yellow> 
     </keyboard>
   </ScreenCalibration>
   <GUICalibration>
     <keyboard name="The Little Black Box Remote">
-      <select>NextCalibration</select>
+      <return>NextCalibration</return>
       <red>ResetCalibration</red>
     </keyboard>
   </GUICalibration>
@@ -296,7 +275,7 @@
       <yellow>ActivateWindow(OSDAudioSettings)</yellow>
       <blue>ActivateWindow(VideoBookmarks)</blue>
       <backspace>Fullscreen</backspace>
-      <select>Select</select>
+      <return>Select</return>
       <f7>SkipNext</f7>
       <rewind>SkipPrevious</rewind>
     </keyboard>
@@ -322,8 +301,6 @@
   <MyVideoLibrary>
     <keyboard name="The Little Black Box Remote">
       <settings>ActivateWindow(VideosSettings)</settings>
-      <pageup>PageUp</pageup>
-      <pagedown>PageDown</pagedown>
       <red>Delete</red>
       <green>Queue</green>
       <yellow>ActivateWindow(Favourites)</yellow>
@@ -335,8 +312,6 @@
   <MyVideoFiles>
     <keyboard name="The Little Black Box Remote">
       <settings>ActivateWindow(VideosSettings)</settings>
-      <pageup>PageUp</pageup>
-      <pagedown>PageDown</pagedown>
       <zero>ActivateWindow(VideoPlaylist)</zero>
       <red>Delete</red>
       <green>Queue</green>
@@ -363,8 +338,6 @@
   <MyPictures>
     <keyboard name="The Little Black Box Remote">
       <settings>ActivateWindow(PicturesSettings)</settings>
-      <pageup>PageUp</pageup>
-      <pagedown>PageDown</pagedown>
       <red>Delete</red>
       <yellow>ActivateWindow(Favourites)</yellow>
 	  <blue>ActivateWindow(Videos,Video Add-ons)</blue>
@@ -453,7 +426,7 @@
   <PVROSDChannels>
     <keyboard name="The Little Black Box Remote">
       <backspace>Close</backspace>
-      <select>RunScript(special://xbmc/system/keymaps/tlbb/py_select_close.py)</select>
+      <return>RunScript(special://xbmc/system/keymaps/tlbb/py_select_close.py)</return>
       <pageup>ChannelUp</pageup>
       <pagedown>ChannelDown</pagedown>
     </keyboard>
@@ -461,8 +434,6 @@
   <PVROSDGuide>
     <keyboard name="The Little Black Box Remote">
       <backspace>Close</backspace>
-      <pageup>PageUp</pageup>
-      <pagedown>PageDown</pagedown>
       <help>Select</help>
     </keyboard>
   </PVROSDGuide>
@@ -489,8 +460,6 @@
   </MyTVSettings>
   <FileBrowser>
     <keyboard name="The Little Black Box Remote">
-      <pageup>PageUp</pageup>
-      <pagedown>PageDown</pagedown>
       <red>Delete</red>
       <green>Highlight</green>
       <yellow>ActivateWindow(Favourites)</yellow>
