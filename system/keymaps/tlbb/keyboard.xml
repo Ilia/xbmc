@@ -19,7 +19,7 @@
       <f11>VolumeDown</f11>						<!-- Button 20 : vol- -->
       <pageup>PageUp</pageup>  						<!-- Button 21 : pg+ -->
       <pagedown>PageDown</pagedown>					<!-- Button 22 : pg- -->
-<!--      <f4>ActivateWindow(Home)</f4>					<!-- Button 23 : home -->
+      <f4>ActivateWindow(Home)</f4>					<!-- Button 23 : home -->
       <f1>ContextMenu</f1>						<!-- Button 24 : = -->
       <music>ActivateWindow(Music)</music>				<!-- Button 28 : music -->
       <movies>ActivateWindow(Videos,MovieTitles)</movies>		<!-- Button 32 : movies -->
