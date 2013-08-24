@@ -215,6 +215,7 @@ const BUILT_IN commands[] = {
   { "ToggleDebug",                false,  "Enables/disables debug mode" },
   { "StartPVRManager",            false,  "(Re)Starts the PVR manager" },
   { "StopPVRManager",             false,  "Stops the PVR manager" },
+  { "ReloadSources",              false,  "Reloads the sources.xml file" }, 
 };
 
 bool CBuiltins::HasCommand(const CStdString& execString)
@@ -1638,6 +1639,10 @@ int CBuiltins::Execute(const CStdString& execString)
   {
     g_application.StopPVRManager();
   }
+  else if (execute.Equals("reloadsources"))
+  {
+    g_settings.LoadSources();
+  } 
   else
     return -1;
   return 0;
