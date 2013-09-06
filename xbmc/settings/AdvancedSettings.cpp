@@ -705,11 +705,8 @@ void CAdvancedSettings::ParseSettingsFile(const CStdString &file)
     XMLUtils::GetInt(pElement, "curlretries", m_curlretries, 0, 10);
     XMLUtils::GetBoolean(pElement,"disableipv6", m_curlDisableIPV6);
     XMLUtils::GetUInt(pElement, "cachemembuffersize", m_cacheMemBufferSize);
-<<<<<<< HEAD
-=======
     XMLUtils::GetBoolean(pElement, "alwaysforcebuffer", m_alwaysForceBuffer);
     XMLUtils::GetFloat(pElement, "readbufferfactor", m_readBufferFactor);
->>>>>>> c90da13... Use advancedsetting to speed up ReadRate in players
   }
 
   pElement = pRootElement->FirstChildElement("jsonrpc");
