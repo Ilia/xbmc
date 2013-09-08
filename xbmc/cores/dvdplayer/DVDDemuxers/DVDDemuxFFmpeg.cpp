@@ -41,12 +41,16 @@
 #include "commons/Exception.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/GUISettings.h"
+#include "settings/Settings.h"
 #include "filesystem/File.h"
 #include "filesystem/Directory.h"
 #include "utils/log.h"
 #include "threads/Thread.h"
 #include "threads/SystemClock.h"
 #include "utils/TimeUtils.h"
+#include "URL.h"
+
+#define FF_MAX_EXTRADATA_SIZE ((1 << 28) - FF_INPUT_BUFFER_PADDING_SIZE) 
 
 void CDemuxStreamAudioFFmpeg::GetStreamInfo(std::string& strInfo)
 {
@@ -283,25 +287,32 @@ bool CDVDDemuxFFmpeg::Open(CDVDInputStream* pInput)
   {
     // special stream type that makes avformat handle file opening
     // allows internal ffmpeg protocols to be used
+    CURL url = m_pInput->GetURL();
+    CStdString protocol = url.GetProtocol();
+
+    AVDictionary *options = GetFFMpegOptionsFromURL(url);
+
     int result=-1;
-    if (strFile.substr(0,6) == "mms://")
+    if (protocol.Equals("mms"))
     {
       // try mmsh, then mmst
-      CStdString strFile2;
-      strFile2.Format("mmsh://%s",strFile.substr(6,strFile.size()-6).c_str());
-      result = m_dllAvFormat.avformat_open_input(&m_pFormatContext, strFile2.c_str(), iformat, NULL);
+      url.SetProtocol("mmsh");
+      url.SetProtocolOptions("");
+      result = m_dllAvFormat.avformat_open_input(&m_pFormatContext, url.Get().c_str(), iformat, &options);
       if (result < 0)
       {
-        strFile = "mmst://";
-        strFile += strFile2.Mid(7).c_str();
-      } 
+        url.SetProtocol("mmst");
+        strFile = url.Get();
+      }
     }
-    if (result < 0 && m_dllAvFormat.avformat_open_input(&m_pFormatContext, strFile.c_str(), iformat, NULL) < 0 )
+    if (result < 0 && m_dllAvFormat.avformat_open_input(&m_pFormatContext, strFile.c_str(), iformat, &options) < 0 )
     {
       CLog::Log(LOGDEBUG, "Error, could not open file %s", strFile.c_str());
       Dispose();
+      m_dllAvUtil.av_dict_free(&options);
       return false;
     }
+    m_dllAvUtil.av_dict_free(&options);
   }
   else
   {
@@ -438,12 +449,20 @@ bool CDVDDemuxFFmpeg::Open(CDVDInputStream* pInput)
   m_bMatroska = strncmp(m_pFormatContext->iformat->name, "matroska", 8) == 0;	// for "matroska.webm"
   m_bAVI = strcmp(m_pFormatContext->iformat->name, "avi") == 0;
 
+  // Fast udp/mpegts startup and channel switching.
+  // Set streaminfo false and skip avformat_find_stream_info (slow)
+  // as it takes 5-10 seconds, see CDVDDemuxFFmpeg::Read().
+  if (strncmp(m_pFormatContext->iformat->name, "mpegts", 6) == 0 &&
+      strncmp(m_pFormatContext->filename, "udp", 3) == 0)
+  {
+    streaminfo = false;
+  }
+
   if (streaminfo)
   {
     /* too speed up dvd switches, only analyse very short */
     if(m_pInput->IsStreamType(DVDSTREAM_TYPE_DVD))
       m_pFormatContext->max_analyze_duration = 500000;
-
 
     CLog::Log(LOGDEBUG, "%s - avformat_find_stream_info starting", __FUNCTION__);
     int iErr = m_dllAvFormat.avformat_find_stream_info(m_pFormatContext, NULL);
@@ -598,6 +617,86 @@ void CDVDDemuxFFmpeg::SetSpeed(int iSpeed)
   }
 }
 
+AVDictionary *CDVDDemuxFFmpeg::GetFFMpegOptionsFromURL(const CURL &url)
+{
+  CStdString protocol = url.GetProtocol();
+
+  AVDictionary *options = NULL;
+
+  if (protocol.Equals("http") || protocol.Equals("https"))
+  {
+    std::map<CStdString, CStdString> protocolOptions;
+    url.GetProtocolOptions(protocolOptions);
+    std::string headers;
+    bool hasUserAgent = false;
+    for(std::map<CStdString, CStdString>::const_iterator it = protocolOptions.begin(); it != protocolOptions.end(); ++it)
+    {
+      const CStdString &name = it->first;
+      const CStdString &value = it->second;
+
+      if (name.Equals("seekable"))
+        m_dllAvUtil.av_dict_set(&options, "seekable", value.c_str(), 0);
+      else if (name.Equals("User-Agent"))
+      {
+        m_dllAvUtil.av_dict_set(&options, "user-agent", value.c_str(), 0);
+        hasUserAgent = true;
+      }
+      else if (!name.Equals("auth") && !name.Equals("Encoding"))
+        // all other protocol options can be added as http header.
+        headers.append(name).append(": ").append(value).append("\r\n");
+    }
+    if (!hasUserAgent)
+      // set default xbmc user-agent.
+      m_dllAvUtil.av_dict_set(&options, "user-agent", g_settings.m_userAgent.c_str(), 0);
+
+    if (!headers.empty())
+      m_dllAvUtil.av_dict_set(&options, "headers", headers.c_str(), 0);
+  }
+  else if (protocol.Equals("udp"))
+  {
+    std::map<CStdString, CStdString> protocolOptions;
+    url.GetProtocolOptions(protocolOptions);
+
+    CStdString pkt_size = "6580";       // default is 1472
+    CStdString fifo_size = "57344";     // default is 7*4096 (28672)
+    CStdString buffer_size = "131072";  // default is 65536
+    for(std::map<CStdString, CStdString>::const_iterator it = protocolOptions.begin(); it != protocolOptions.end(); ++it)
+    {
+      const CStdString &name = it->first;
+      const CStdString &value = it->second;
+
+      if (name.Equals("pkt_size"))
+      {
+        // Set the size in bytes of UDP packets
+        pkt_size = value;
+      }
+      else if (name.Equals("buf_size"))
+      {
+        // Set the UDP receiving circular buffer size,
+        // expressed as a number of packets with size of 188 bytes
+        fifo_size = value;
+      }
+      else if (name.Equals("fifo_size"))
+      {
+        // Set the UDP receiving circular buffer size,
+        // expressed as a number of packets with size of 188 bytes
+        fifo_size = value;
+      }
+      else if (name.Equals("buffer_size"))
+      {
+        // Set the UDP socket buffer size in bytes
+        buffer_size = value;
+      }
+    }
+
+    m_dllAvUtil.av_dict_set(&options, "pkt_size",    pkt_size.c_str(), 0);
+    m_dllAvUtil.av_dict_set(&options, "fifo_size",   fifo_size.c_str(), 0);
+    m_dllAvUtil.av_dict_set(&options, "buffer_size", buffer_size.c_str(), 0);
+  }
+
+  return options;
+}
+
 double CDVDDemuxFFmpeg::ConvertTimestamp(int64_t pts, int den, int num)
 {
   if (pts == (int64_t)AV_NOPTS_VALUE)
@@ -672,6 +771,68 @@ DemuxPacket* CDVDDemuxFFmpeg::Read()
     else
     {
       AVStream *stream = m_pFormatContext->streams[pkt.stream_index];
+
+      AVStream *st = m_pFormatContext->streams[pkt.stream_index];
+      // Fast udp/mpegts startup and channel switching.
+      // Set streaminfo false and skip avformat_find_stream_info (slow)
+      // But we need a proper codec extradata so fill it in for ffmpeg.
+      // This routine is taken from avformat_find_stream_info and friends.
+      if(st->parser && st->parser->parser->split && !st->codec->extradata)
+      {
+          int i= st->parser->parser->split(st->codec, pkt.data, pkt.size);
+          if (i > 0 && i < FF_MAX_EXTRADATA_SIZE)
+          {
+              // Found extradata, fill it in, this will cause
+              // a new stream to be created and used. Watch out in
+              // codecs as there will be a double open, the 1st time,
+              // hints will be bogus, the 2nd time is the new stream.
+              st->codec->extradata_size= i;
+              st->codec->extradata= (uint8_t*)m_dllAvUtil.av_malloc(st->codec->extradata_size + FF_INPUT_BUFFER_PADDING_SIZE);
+              if (st->codec->extradata)
+              {
+                  CLog::Log(LOGNOTICE, "CDVDDemuxFFmpeg::Read() fetching extradata, info(%p), codec(%p), extradata_size(%d)",
+                    st->info, st->codec->codec, st->codec->extradata_size);
+                  memcpy(st->codec->extradata, pkt.data, st->codec->extradata_size);
+                  memset(st->codec->extradata + i, 0, FF_INPUT_BUFFER_PADDING_SIZE);
+
+                  if (st->codec->codec_type == AVMEDIA_TYPE_VIDEO)
+                  {
+                      AVCodec *codec;
+                      AVDictionary *thread_opt = NULL;
+                      codec = st->codec->codec ? st->codec->codec : m_dllAvCodec.avcodec_find_decoder(st->codec->codec_id);
+                      m_dllAvUtil.av_dict_set(&thread_opt, "threads", "1", 0);
+                      m_dllAvCodec.avcodec_open2(st->codec, codec, &thread_opt);
+                      m_dllAvUtil.av_dict_free(&thread_opt);
+
+                      // we don't need to actually decode here
+                      st->codec->skip_idct = AVDISCARD_ALL;
+                      st->codec->skip_frame = AVDISCARD_ALL;
+                      st->codec->skip_loop_filter = AVDISCARD_ALL;
+
+                      // This seems suspect, we assume that the key_frame
+                      // will be contained in this ffmpeg pkt of demux data,
+                      // seems we should fetch and decode until we hit a key_frame.
+                      // Yet if we comment it out, this game stops working...
+                      AVFrame picture;
+                      //m_dllAvCodec.avcodec_get_frame_defaults(&picture);
+                      memset(&picture, 0, sizeof(AVFrame));
+                      picture.pts = picture.pkt_dts = picture.pkt_pts = picture.best_effort_timestamp = AV_NOPTS_VALUE;
+                      picture.pkt_pos = -1;
+                      picture.key_frame= 1;
+                      picture.sample_aspect_ratio = (AVRational){0, 1};
+                      picture.format = -1;
+
+                      int rtn, got_picture = 0;
+                      rtn = m_dllAvCodec.avcodec_decode_video2(st->codec, &picture, &got_picture, &pkt);
+                      m_dllAvCodec.avcodec_close(st->codec);
+                      //m_dllAvUtil.av_freep(&st->info);
+
+                      st->parser->flags = 0;
+                      CLog::Log(LOGNOTICE, "CDVDDemuxFFmpeg::Read() rtn(%d), got_picture(%d)", rtn, got_picture);
+                  }
+              }
+          }
+      }
 
       if (m_program != UINT_MAX)
       {
@@ -966,8 +1127,8 @@ void CDVDDemuxFFmpeg::AddStream(int iId)
         else
           st->bVFR = false;
 
-        // never trust pts in avi files
-        if (m_bAVI)
+        // never trust pts in avi files with h264.
+        if (m_bAVI && pStream->codec->codec_id == CODEC_ID_H264)
           st->bPTSInvalid = true;
 
         //average fps is more accurate for mkv files
