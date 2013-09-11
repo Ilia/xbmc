@@ -110,6 +110,9 @@ typedef unsigned long kernel_ulong_t;
 #include "input/MouseStat.h"
 #include "utils/log.h"
 
+// rvd
+#include "settings/AdvancedSettings.h"
+
 #ifndef BITS_PER_LONG
 #define BITS_PER_LONG        (sizeof(long) * 8)
 #endif
@@ -717,10 +720,23 @@ void CLinuxInputDevice::SetLed(int led, int state)
  * Input thread reading from device.
  * Generates events on incoming data.
  */
+
+long long int deltatime_usec(struct timeval ctime, struct timeval otime)
+{
+	long long delta = 0;
+	delta = (ctime.tv_sec - otime.tv_sec) * 1000000;
+	delta += (ctime.tv_usec - otime.tv_usec);
+	return delta;
+}
+
 XBMC_Event CLinuxInputDevice::ReadEvent()
 {
   int readlen;
   struct input_event levt;
+
+  // rvd, hardware keybounce delay
+  static struct input_event levt_old;
+  long key_repeat_usec = g_advancedSettings.m_usbhidrepeatdelay * 1000;
 
   XBMC_Event devt;
 
@@ -755,6 +771,23 @@ XBMC_Event CLinuxInputDevice::ReadEvent()
       printf("CLinuxInputDevice: read error : %s\n", strerror(errno));
       break;
     }
+
+	// rvd, hardware keybounce delay
+	// Show only the type events: EV_KEY.
+	if (levt.type == EV_KEY) {
+	    // Show KeyDown events only, is value means Key status ( 0 = Release, 1 = Pressed , 2 = Repeat
+	    if (levt.value == 1) { 
+		// Check if the same key is pressed.
+		if (levt.code == levt_old.code) {
+		    if ( deltatime_usec(levt.time, levt_old.time) < key_repeat_usec) {
+			levt_old = levt;
+			return devt;
+		    }
+		}
+		// store only the latest key event of KeyDown.
+		levt_old = levt;
+	    }
+        }
 
     if (!TranslateEvent(levt, devt))
       continue;
