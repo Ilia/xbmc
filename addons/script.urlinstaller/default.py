@@ -6,6 +6,7 @@ import downloader
 
 ADDON = xbmcaddon.Addon(id='script.urlinstaller')
 
+profile=ADDON.getSetting('profile')
 
 
 def INSTALL_URL(url):
@@ -21,7 +22,11 @@ def INSTALL_URL(url):
     time.sleep(4)
     dp.update(0, "Extracting ",'',"Please Wait")
     extract.all(lib,addonfolder,dp)
-    dialog.ok("URL Installer", "All Done","Next Time You Reboot Will Take Effect", "")
+    time.sleep(2)
+    try:
+        xbmc.executebuiltin("LoadProfile(%s)"%(profile))
+    except:
+        dialog.ok("URL Installer", "All Done","Next Time You Reboot Will Take Effect", "")
 	        
     
     
