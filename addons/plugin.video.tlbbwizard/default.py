@@ -46,7 +46,8 @@ def wizard(name,url,description):
     xbmc.executebuiltin("XBMC.Extract(%s,%s)" %(lib,addonfolder))
     dp.close()
     dialog = xbmcgui.Dialog()
-    dialog.ok("TLBB Wizard", "Please reboot to finalise installation")
+    dialog.ok("TLBB Wizard", "All Done TLBB Will Now Load Content")
+    xbmc.executebuiltin("LoadProfile(Master user)")
 
 def addDir(name,url,mode,iconimage,fanart,description):
         u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)+"&iconimage="+urllib.quote_plus(iconimage)+"&fanart="+urllib.quote_plus(fanart)+"&description="+urllib.quote_plus(description)
