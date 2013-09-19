@@ -2,7 +2,7 @@
 <keymap>
   <global>
     <keyboard name="The Little Black Box Remote">
-      <!-- <>power</>-->						<!-- Button 01 : Power -->
+      <power>XBMC.ActivateWindow(shutdownmenu)</power>			<!-- Button 01 : Power -->
       <f10>Mute</f10>							<!-- Button 02 : Mute -->
       <rewind>SkipPrevious</rewind>					<!-- Button 03 : |< -->
       <play_pause>Play</play_pause>					<!-- Button 04 : ||> -->
