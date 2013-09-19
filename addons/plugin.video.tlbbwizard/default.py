@@ -27,8 +27,10 @@ def OPEN_URL(url):
     response.close()
     return link
     
+    
 def wizard(name,url,description):
     path = xbmc.translatePath(os.path.join('special://home/addons','packages'))
+    addonfolder = xbmc.translatePath(os.path.join('special://','home'))
     dp = xbmcgui.DialogProgress()
     dp.create("TLBB Wizard","Downloading ",'', 'Please Wait')
     lib=os.path.join(path, name+'.zip')
@@ -37,14 +39,9 @@ def wizard(name,url,description):
     except:
        pass
     downloader.download(url, lib, dp)
-    addonfolder = xbmc.translatePath(os.path.join('special://','home'))
-    time.sleep(2)
+    time.sleep(3)
     dp.update(0,"", "Extracting Zip Please Wait")
-    print '======================================='
-    print addonfolder
-    print '======================================='
     xbmc.executebuiltin("XBMC.Extract(%s,%s)" %(lib,addonfolder))
-    dp.close()
     dialog = xbmcgui.Dialog()
     dialog.ok("TLBB Wizard", "All Done TLBB Will Now Load Content")
     xbmc.executebuiltin("LoadProfile(Master user)")
@@ -129,3 +126,4 @@ elif mode==1:
         wizard(name,url,description)
         
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
