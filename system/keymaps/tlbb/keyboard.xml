@@ -130,7 +130,7 @@
       <fastforward>FastForward</fastforward>
       <f3>Rewind</f3>
       <backspace>Fullscreen</backspace>
-      <select>OSD</select>
+      <return>OSD</return>
       <menu>OSD</menu>
       <help>Info</help>
       <left>StepBack</left>
@@ -151,7 +151,7 @@
   </FullscreenVideo>
   <VideoTimeSeek>
     <keyboard name="The Little Black Box Remote">
-      <select>Select</select>
+      <return>Select</return>
     </keyboard>
   </VideoTimeSeek>
   <FullscreenInfo>
@@ -173,7 +173,7 @@
       <fastforward>FastForward</fastforward>
       <f3>Rewind</f3>
       <backspace>Fullscreen</backspace>
-      <select>OSD</select>
+      <return>OSD</return>
       <menu>OSD</menu>
       <help>CodecInfo</help>
       <left>SkipPrevious</left>
