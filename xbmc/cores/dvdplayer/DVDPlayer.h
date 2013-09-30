@@ -461,7 +461,7 @@ protected:
     double  cache_level;   // current estimated required cache level
     double  cache_delay;   // time until cache is expected to reach estimated level
     double  cache_offset;  // percentage of file ahead of current position
-  } m_State;
+  } m_State, m_StateInput;
   CCriticalSection m_StateSection;
 
   CEvent m_ready;
