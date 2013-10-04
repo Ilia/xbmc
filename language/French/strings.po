@@ -3918,8 +3918,8 @@ msgid "Hibernate"
 msgstr "Mettre en veille"
 
 msgctxt "#13011"
-msgid "Suspend"
-msgstr "Suspendre"
+msgid "PowerDown (suspend)"
+msgstr "PowerDown (suspend)re"
 
 msgctxt "#13012"
 msgid "Exit"

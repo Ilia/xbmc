@@ -3798,7 +3798,7 @@ msgid "Hibernate"
 msgstr "Hibernacija"
 
 msgctxt "#13011"
-msgid "Suspend"
+msgid "PowerDown (suspend)"
 msgstr "Obustavi"
 
 msgctxt "#13012"

@@ -3802,7 +3802,7 @@ msgid "Hibernate"
 msgstr "ハイバネート"
 
 msgctxt "#13011"
-msgid "Suspend"
+msgid "PowerDown (suspend)"
 msgstr "サスペンド"
 
 msgctxt "#13012"

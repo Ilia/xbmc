@@ -3914,7 +3914,7 @@ msgid "Hibernate"
 msgstr "Pauzim"
 
 msgctxt "#13011"
-msgid "Suspend"
+msgid "PowerDown (suspend)"
 msgstr "Pezullim"
 
 msgctxt "#13012"

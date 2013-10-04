@@ -3894,7 +3894,7 @@ msgid "Hibernate"
 msgstr "최대절전"
 
 msgctxt "#13011"
-msgid "Suspend"
+msgid "PowerDown (suspend)"
 msgstr "대기"
 
 msgctxt "#13012"
