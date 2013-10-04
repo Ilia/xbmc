@@ -3918,7 +3918,7 @@ msgid "Hibernate"
 msgstr "מצב שינה"
 
 msgctxt "#13011"
-msgid "Suspend"
+msgid "PowerDown (suspend)"
 msgstr "השהייה"
 
 msgctxt "#13012"

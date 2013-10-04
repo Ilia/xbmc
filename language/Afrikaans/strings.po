@@ -3918,8 +3918,8 @@ msgid "Hibernate"
 msgstr "Hiberneer"
 
 msgctxt "#13011"
-msgid "Suspend"
-msgstr "Suspendeer"
+msgid "PowerDown (suspend)"
+msgstr "PowerDown (suspend)eer"
 
 msgctxt "#13012"
 msgid "Exit"

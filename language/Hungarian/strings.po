@@ -3918,7 +3918,7 @@ msgid "Hibernate"
 msgstr "Hibernálás"
 
 msgctxt "#13011"
-msgid "Suspend"
+msgid "PowerDown (suspend)"
 msgstr "Alvó üzemmód"
 
 msgctxt "#13012"

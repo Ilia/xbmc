@@ -64,7 +64,11 @@ def set_property(name, value):
 
 def refresh_locations():
     locations = 0
+<<<<<<< HEAD
     for count in range(1, 4):
+=======
+    for count in range(1, 6):
+>>>>>>> ac50b23... [TLBB] Update default plugins
         loc_name = __addon__.getSetting('Location%s' % count)
         if loc_name != '':
             locations += 1
@@ -234,9 +238,6 @@ def properties(data,loc):
     if SPEEDUNIT == 'mph':
         set_property('Current.Visibility'    , data['current_observation']['visibility_mi'] + ' mi')
         set_property('Current.WindGust'      , str(data['current_observation']['wind_gust_mph']) + ' ' + SPEEDUNIT)
-    elif SPEEDUNIT == 'Beaufort':
-        set_property('Current.Visibility'    , data['current_observation']['visibility_km'] + ' km')
-        set_property('Current.WindGust'      , KPHTOBFT(data['current_observation']['wind_gust_kph']))
     else:
         set_property('Current.Visibility'    , data['current_observation']['visibility_km'] + ' km')
         set_property('Current.WindGust'      , str(data['current_observation']['wind_gust_kph']) + ' ' + SPEEDUNIT)
@@ -583,6 +584,9 @@ log('temp: %s'    % TEMPUNIT[1])
 log('time: %s'    % TIMEFORMAT)
 log('date: %s'    % DATEFORMAT)
 
+set_property('WeatherProvider', __addonname__)
+set_property('WeatherProviderLogo', xbmc.translatePath(os.path.join(__cwd__, 'resources', 'banner.png')))
+
 if sys.argv[1].startswith('Location'):
     keyboard = xbmc.Keyboard('', xbmc.getLocalizedString(14024), False)
     keyboard.doModal()
@@ -617,5 +621,4 @@ else:
         clear()
     refresh_locations()
 
-set_property('WeatherProvider', __addonname__)
 log('finished')

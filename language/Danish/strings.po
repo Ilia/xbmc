@@ -3918,7 +3918,7 @@ msgid "Hibernate"
 msgstr "Dvale"
 
 msgctxt "#13011"
-msgid "Suspend"
+msgid "PowerDown (suspend)"
 msgstr "Slumre"
 
 msgctxt "#13012"

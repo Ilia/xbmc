@@ -3850,7 +3850,7 @@ msgid "Hibernate"
 msgstr "Hibernovat"
 
 msgctxt "#13011"
-msgid "Suspend"
+msgid "PowerDown (suspend)"
 msgstr "Uspat"
 
 msgctxt "#13012"
