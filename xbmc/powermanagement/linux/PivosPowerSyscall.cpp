@@ -35,7 +35,7 @@ CPivosPowerSyscall::CPivosPowerSyscall()
   }
   else
   {
-    m_CanPowerdown = true;
+    m_CanPowerdown = false;
     m_CanSuspend   = true;
   }
   m_CanHibernate = false;
