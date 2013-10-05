@@ -1,6 +1,6 @@
 /*
- *      Copyright (C) 2010-2012 Team XBMC
- *      http://www.xbmc.org
+ *      Copyright (C) 2010-2013 Team XBMC
+ *      http://xbmc.org
  *
  *  This Program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -328,6 +328,10 @@ bool CBitstreamConverter::Open(enum CodecID codec, uint8_t *in_extradata, int in
       }
       else
       {
+        m_dllAvUtil = new DllAvUtil;
+        if (!m_dllAvUtil->Load())
+            return false;
+
         // valid avcC atom data always starts with the value 1 (version)
         if ( in_extradata[0] != 1 )
         {
@@ -337,9 +341,8 @@ bool CBitstreamConverter::Open(enum CodecID codec, uint8_t *in_extradata, int in
             CLog::Log(LOGINFO, "CBitstreamConverter::Open annexb to bitstream init");
             // video content is from x264 or from bytestream h264 (AnnexB format)
             // NAL reformating to bitstream format needed
-            m_dllAvUtil = new DllAvUtil;
             m_dllAvFormat = new DllAvFormat;
-            if (!m_dllAvUtil->Load() || !m_dllAvFormat->Load())
+            if (!m_dllAvFormat->Load())
               return false;
 
             AVIOContext *pb;
@@ -373,20 +376,24 @@ bool CBitstreamConverter::Open(enum CodecID codec, uint8_t *in_extradata, int in
             CLog::Log(LOGINFO, "CBitstreamConverter::Open annexb to bitstream init 3 byte to 4 byte nal");
             // video content is from so silly encoder that think 3 byte NAL sizes
             // are valid, setup to convert 3 byte NAL sizes to 4 byte.
-            m_dllAvUtil = new DllAvUtil;
             m_dllAvFormat = new DllAvFormat;
-            if (!m_dllAvUtil->Load() || !m_dllAvFormat->Load())
+            if (!m_dllAvFormat->Load())
               return false;
 
             in_extradata[4] = 0xFF;
             m_convert_3byteTo4byteNALSize = true;
-           
+
             m_extradata = (uint8_t *)m_dllAvUtil->av_malloc(in_extrasize);
             memcpy(m_extradata, in_extradata, in_extrasize);
             m_extrasize = in_extrasize;
             return true;
           }
         }
+        // valid avcC atom
+        m_extradata = (uint8_t*)m_dllAvUtil->av_malloc(in_extrasize);
+        memcpy(m_extradata, in_extradata, in_extrasize);
+        m_extrasize = in_extrasize;
+        return true;
       }
       return false;
       break;
@@ -484,7 +491,7 @@ bool CBitstreamConverter::Convert(uint8_t *pData, int iSize)
 
           // convert demuxer packet from bytestream (AnnexB) to bitstream
           AVIOContext *pb;
-  
+
           if(m_dllAvFormat->avio_open_dyn_buf(&pb) < 0)
           {
             return false;
@@ -517,7 +524,7 @@ bool CBitstreamConverter::Convert(uint8_t *pData, int iSize)
             m_dllAvFormat->avio_write(pb, nal_start, nal_size);
             nal_start += nal_size;
           }
-  
+
           m_convertSize = m_dllAvFormat->avio_close_dyn_buf(pb, &m_convertBuffer);
         }
         return true;
@@ -542,7 +549,7 @@ int CBitstreamConverter::GetConvertSize()
   if((m_convert_bitstream || m_convert_bytestream || m_convert_3byteTo4byteNALSize) && m_convertBuffer != NULL)
     return m_convertSize;
   else
-    return m_inputSize; 
+    return m_inputSize;
 }
 
 uint8_t *CBitstreamConverter::GetExtraData()
@@ -918,11 +925,11 @@ bool CBitstreamConverter::mpeg2_sequence_header(const uint8_t *data, const uint3
       nal_bs_init(&bs, nal_start, end - nal_start);
 
       // sequence_header_code
-      nal_bs_read(&bs, 8);  
+      nal_bs_read(&bs, 8);
 
       // width
       // nal_start + 12 bits == horizontal_size_value
-      uint32_t width = nal_bs_read(&bs, 12);  
+      uint32_t width = nal_bs_read(&bs, 12);
       if (width != sequence->width)
       {
         changed = true;
