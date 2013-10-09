@@ -407,7 +407,6 @@ static vdec_type_t codec_tag_to_vdec_type(unsigned int codec_tag)
       // h263
       dec_type = VIDEO_DEC_FORMAT_H263;
       break;
-    case 27:
     case CODEC_TAG_AVC1:
     case CODEC_TAG_avc1:
     case CODEC_TAG_H264:
