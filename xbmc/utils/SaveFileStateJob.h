@@ -6,8 +6,6 @@
 #include "FileItem.h"
 #include "pvr/PVRManager.h"
 #include "pvr/recordings/PVRRecordings.h"
-#include "settings/MediaSettings.h"
-#include "network/upnp/UPnP.h"
 
 class CSaveFileStateJob : public CJob
 {
@@ -44,13 +42,6 @@ bool CSaveFileStateJob::DoWork()
 
   if (progressTrackingFile != "")
   {
-#ifdef HAS_UPNP
-    // checks if UPnP server of this file is available and supports updating
-    if (URIUtils::IsUPnP(progressTrackingFile)
-          && UPNP::CUPnP::SaveFileState(m_item, m_bookmark, m_updatePlayCount)) {
-        return true;
-    }
-#endif
     if (m_item.IsVideo())
     {
       CLog::Log(LOGDEBUG, "%s - Saving file state for video item %s", __FUNCTION__, progressTrackingFile.c_str());
@@ -99,16 +90,6 @@ bool CSaveFileStateJob::DoWork()
               PVR::CPVRRecording *recording = m_item.GetPVRRecordingInfoTag();
               recording->SetLastPlayedPosition(m_bookmark.timeInSeconds <= 0.0f ? 0 : (int)m_bookmark.timeInSeconds);
               recording->m_resumePoint = m_bookmark;
-            }
-
-            // UPnP announce resume point changes to clients
-            // however not if playcount is modified as that already announces
-            if (m_item.IsVideoDb() && !m_updatePlayCount)
-            {
-              CVariant data;
-              data["id"] = m_item.GetVideoInfoTag()->m_iDbId;
-              data["type"] = m_item.GetVideoInfoTag()->m_type;
-              ANNOUNCEMENT::CAnnouncementManager::Announce(ANNOUNCEMENT::VideoLibrary, "xbmc", "OnUpdate", data);
             }
 
             updateListing = true;
