@@ -3918,7 +3918,7 @@ msgid "Hibernate"
 msgstr "Гібернацыя"
 
 msgctxt "#13011"
-msgid "Suspend"
+msgid "PowerDown (suspend)"
 msgstr "Прыпыніць"
 
 msgctxt "#13012"

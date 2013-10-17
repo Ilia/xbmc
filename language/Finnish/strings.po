@@ -3918,7 +3918,7 @@ msgid "Hibernate"
 msgstr "Horrostila"
 
 msgctxt "#13011"
-msgid "Suspend"
+msgid "PowerDown (suspend)"
 msgstr "Valmiustila"
 
 msgctxt "#13012"

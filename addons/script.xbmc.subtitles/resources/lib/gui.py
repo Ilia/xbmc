@@ -13,12 +13,21 @@ from utilities import *
 _              = sys.modules[ "__main__" ].__language__
 __scriptname__ = sys.modules[ "__main__" ].__scriptname__
 __addon__      = sys.modules[ "__main__" ].__addon__
+<<<<<<< HEAD
 __profile__    = sys.modules[ "__main__" ].__profile__ 
 __version__    = sys.modules[ "__main__" ].__version__
 
 class GUI( xbmcgui.WindowXMLDialog ):
         
   def __init__( self, *args, **kwargs ):        
+=======
+__profile__    = sys.modules[ "__main__" ].__profile__
+__version__    = sys.modules[ "__main__" ].__version__
+
+class GUI( xbmcgui.WindowXMLDialog ):
+
+  def __init__( self, *args, **kwargs ):
+>>>>>>> upstream/tlbb_12.3
     pass
 
   def onInit( self ):
@@ -33,14 +42,24 @@ class GUI( xbmcgui.WindowXMLDialog ):
     except:
       errno, errstr = sys.exc_info()[:2]
       xbmc.sleep(2000)
+<<<<<<< HEAD
       self.close()      
 
   def set_allparam(self):       
+=======
+      self.close()
+
+  def set_allparam(self):
+>>>>>>> upstream/tlbb_12.3
     self.list            = []
     service_list         = []
     self.stackPath       = []
     service              = ""
+<<<<<<< HEAD
     self.man_search_str  = ""   
+=======
+    self.man_search_str  = ""
+>>>>>>> upstream/tlbb_12.3
     self.temp            = False
     self.rar             = False
     self.stack           = False
@@ -56,6 +75,7 @@ class GUI( xbmcgui.WindowXMLDialog ):
     self.mansearch       =  __addon__.getSetting( "searchstr" ) == "true"                # Manual search string??
     self.parsearch       =  __addon__.getSetting( "par_folder" ) == "true"               # Parent folder as search string
     self.language_1      = languageTranslate(__addon__.getSetting( "Lang01" ), 4, 0)     # Full language 1
+<<<<<<< HEAD
     self.language_2      = languageTranslate(__addon__.getSetting( "Lang02" ), 4, 0)     # Full language 2  
     self.language_3      = languageTranslate(__addon__.getSetting( "Lang03" ), 4, 0)     # Full language 3
     self.tmp_sub_dir     = os.path.join( __profile__ ,"sub_tmp" )                        # Temporary subtitle extraction directory   
@@ -63,6 +83,15 @@ class GUI( xbmcgui.WindowXMLDialog ):
     
     self.clean_temp()                                                                   # clean temp dirs
     
+=======
+    self.language_2      = languageTranslate(__addon__.getSetting( "Lang02" ), 4, 0)     # Full language 2
+    self.language_3      = languageTranslate(__addon__.getSetting( "Lang03" ), 4, 0)     # Full language 3
+    self.tmp_sub_dir     = os.path.join( __profile__ ,"sub_tmp" )                        # Temporary subtitle extraction directory
+    self.stream_sub_dir  = os.path.join( __profile__ ,"sub_stream" )                     # Stream subtitle directory
+
+    self.clean_temp()                                                                   # clean temp dirs
+
+>>>>>>> upstream/tlbb_12.3
     if ( movieFullPath.find("http") > -1 ):
       self.sub_folder = self.stream_sub_dir
       self.temp = True
@@ -70,7 +99,11 @@ class GUI( xbmcgui.WindowXMLDialog ):
     elif ( movieFullPath.find("rar://") > -1 ):
       self.rar = True
       movieFullPath = os.path.dirname(movieFullPath[6:])
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> upstream/tlbb_12.3
     elif ( movieFullPath.find("stack://") > -1 ):
       self.stackPath = movieFullPath.split(" , ")
       movieFullPath = self.stackPath[0][8:]
@@ -82,11 +115,19 @@ class GUI( xbmcgui.WindowXMLDialog ):
         xbmcvfs.mkdirs(self.sub_folder)
       else:
         self.sub_folder = os.path.dirname( movieFullPath )
+<<<<<<< HEAD
     
     if not xbmcvfs.exists(self.sub_folder):
       xbmcvfs.mkdir(self.sub_folder)
     
     if self.episode.lower().find("s") > -1:                                      # Check if season is "Special"             
+=======
+
+    if not xbmcvfs.exists(self.sub_folder):
+      xbmcvfs.mkdir(self.sub_folder)
+
+    if self.episode.lower().find("s") > -1:                                      # Check if season is "Special"
+>>>>>>> upstream/tlbb_12.3
       self.season = "0"                                                          #
       self.episode = self.episode[-1:]                                           #
 
@@ -97,6 +138,7 @@ class GUI( xbmcgui.WindowXMLDialog ):
       self.title  = normalizeString(xbmc.getInfoLabel("VideoPlayer.Title"))      # no original title, get just Title :)
 
     if self.tvshow == "":
+<<<<<<< HEAD
       if str(self.year) == "":
         title, season, episode = regex_tvshow(False, self.title)
         if episode != "":
@@ -105,6 +147,20 @@ class GUI( xbmcgui.WindowXMLDialog ):
           self.tvshow = title
         else:
           self.title, self.year = xbmc.getCleanMovieTitle( self.title )
+=======
+      if str(self.year) == "":                                            # If we have a year, assume no tv show
+        self.title, self.year = xbmc.getCleanMovieTitle( self.title )     # Clean before trying tvshow regex, else we get false results on some movies
+        if str(self.year) == "":                                          # Still no year: *could* be a tvshow
+          title, season, episode = regex_tvshow(False, self.title)
+          if title != "" and season != "" and episode != "":
+            self.season = str(int(season))
+            self.episode = str(int(episode))
+            self.tvshow = title
+          else:
+            self.season = ""                                              # Reset variables: could contain garbage from tvshow regex above
+            self.episode = ""
+            self.tvshow = ""
+>>>>>>> upstream/tlbb_12.3
     else:
       self.year = ""
 
@@ -121,9 +177,15 @@ class GUI( xbmcgui.WindowXMLDialog ):
                                               int(self.episode)
                                              )
       else:
+<<<<<<< HEAD
         self.file_name = "%s (%s)" % (self.title.encode('utf-8'), str(self.year),)
 
     if ((__addon__.getSetting( "auto_download" ) == "true") and 
+=======
+        self.file_name = "%s (%s)" % (self.title.encode('utf-8'), str(self.year))
+
+    if ((__addon__.getSetting( "auto_download" ) == "true") and
+>>>>>>> upstream/tlbb_12.3
         (__addon__.getSetting( "auto_download_file" ) != os.path.basename( movieFullPath ))):
          self.autoDownload = True
          __addon__.setSetting("auto_download_file", "")
@@ -138,6 +200,7 @@ class GUI( xbmcgui.WindowXMLDialog ):
       def_service = __addon__.getSetting( "deftvservice")
     else:
       def_service = __addon__.getSetting( "defmovieservice")
+<<<<<<< HEAD
       
     if service_list.count(def_service) > 0:
       service = def_service
@@ -147,6 +210,17 @@ class GUI( xbmcgui.WindowXMLDialog ):
         self.service = service_list[0]
       else:
         self.service = service  
+=======
+
+    if service_list.count(def_service) > 0:
+      service = def_service
+
+    if len(service_list) > 0:
+      if len(service) < 1:
+        self.service = service_list[0]
+      else:
+        self.service = service
+>>>>>>> upstream/tlbb_12.3
 
       self.service_list = service_list
       self.next = list(service_list)
@@ -164,10 +238,17 @@ class GUI( xbmcgui.WindowXMLDialog ):
       log( __name__ ,"Tv Show Episode: [%s]"       % self.episode)
       log( __name__ ,"Movie/Episode Title: [%s]"   % self.title)
       log( __name__ ,"Subtitle Folder: [%s]"       % self.sub_folder)
+<<<<<<< HEAD
       log( __name__ ,"Languages: [%s] [%s] [%s]"   % (self.language_1, self.language_2, self.language_3,))
       log( __name__ ,"Parent Folder Search: [%s]"  % self.parsearch)
       log( __name__ ,"Stacked(CD1/CD2)?: [%s]"     % self.stack)
   
+=======
+      log( __name__ ,"Languages: [%s] [%s] [%s]"   % (self.language_1, self.language_2, self.language_3))
+      log( __name__ ,"Parent Folder Search: [%s]"  % self.parsearch)
+      log( __name__ ,"Stacked(CD1/CD2)?: [%s]"     % self.stack)
+
+>>>>>>> upstream/tlbb_12.3
     return self.autoDownload
 
   def Search_Subtitles( self, gui = True ):
@@ -185,11 +266,19 @@ class GUI( xbmcgui.WindowXMLDialog ):
     exec ( "from services.%s import service as Service" % (self.service))
     self.Service = Service
     if gui:
+<<<<<<< HEAD
       self.getControl( STATUS_LABEL ).setLabel( _( 646 ) )
     msg = ""
     socket.setdefaulttimeout(float(__addon__.getSetting( "timeout" )))
     try: 
       self.subtitles_list, self.session_id, msg = self.Service.search_subtitles( 
+=======
+      self.getControl( STATUS_LABEL ).setLabel( _( 646 ))
+    msg = ""
+    socket.setdefaulttimeout(float(__addon__.getSetting( "timeout" )))
+    try:
+      self.subtitles_list, self.session_id, msg = self.Service.search_subtitles(
+>>>>>>> upstream/tlbb_12.3
                                                        self.file_original_path,
                                                        self.title,
                                                        self.tvshow,
@@ -214,7 +303,11 @@ class GUI( xbmcgui.WindowXMLDialog ):
       msg = "Error: %s" % ( str(errstr), )
     socket.setdefaulttimeout(None)
     if gui:
+<<<<<<< HEAD
       self.getControl( STATUS_LABEL ).setLabel( _( 642 ) % ( "...", ) )
+=======
+      self.getControl( STATUS_LABEL ).setLabel( _( 642 ) % ( "...", ))
+>>>>>>> upstream/tlbb_12.3
 
     if not self.subtitles_list:
       if __addon__.getSetting( "search_next" )== "true" and len(self.next) > 1:
@@ -222,7 +315,11 @@ class GUI( xbmcgui.WindowXMLDialog ):
         self.next.remove(self.service)
         self.service = self.next[0]
         self.show_service_list(gui)
+<<<<<<< HEAD
         log( __name__ ,"Auto Searching '%s' Service" % (self.service,) )
+=======
+        log( __name__ ,"Auto Searching '%s' Service" % (self.service))
+>>>>>>> upstream/tlbb_12.3
         self.Search_Subtitles(gui)
       else:
         self.next = list(self.service_list)
@@ -231,20 +328,35 @@ class GUI( xbmcgui.WindowXMLDialog ):
           if msg != "":
             self.getControl( STATUS_LABEL ).setLabel( msg )
           else:
+<<<<<<< HEAD
             self.getControl( STATUS_LABEL ).setLabel( _( 657 ) )
           self.show_service_list(gui)
       if self.autoDownload:    
         xbmc.executebuiltin((u"Notification(%s,%s,%i)" % (__scriptname__, _(767), 1000)).encode("utf-8"))    
+=======
+            self.getControl( STATUS_LABEL ).setLabel( _( 657 ))
+          self.show_service_list(gui)
+      if self.autoDownload:
+        xbmc.executebuiltin((u"Notification(%s,%s,%i)" % (__scriptname__, _(767), 1000)).encode("utf-8"))
+>>>>>>> upstream/tlbb_12.3
     else:
       subscounter = 0
       itemCount = 0
       list_subs = []
+<<<<<<< HEAD
       for item in self.subtitles_list:
         if (self.autoDownload and 
             item["sync"] and  
             (item["language_name"] == languageTranslate(
                 languageTranslate(self.language_1,0,2),2,0)
             )):
+=======
+      mainLangISO = languageTranslate(self.language_1, 0, 3)
+      for item in self.subtitles_list:
+        if (self.autoDownload and item["sync"] and
+            languageTranslate(item["language_name"], 0, 3) == mainLangISO
+        ):
+>>>>>>> upstream/tlbb_12.3
           self.Download_Subtitles(itemCount, True, gui)
           __addon__.setSetting("auto_download_file",
                                os.path.basename( self.file_original_path ))
@@ -253,7 +365,11 @@ class GUI( xbmcgui.WindowXMLDialog ):
           return True
         else:
           if gui:
+<<<<<<< HEAD
             listitem = xbmcgui.ListItem(label=_( languageTranslate(item["language_name"],0,5) ),
+=======
+            listitem = xbmcgui.ListItem(label=_( languageTranslate(item["language_name"],0,5)),
+>>>>>>> upstream/tlbb_12.3
                                         label2=item["filename"],
                                         iconImage=item["rating"],
                                         thumbnailImage=item["language_flag"]
@@ -267,6 +383,7 @@ class GUI( xbmcgui.WindowXMLDialog ):
               listitem.setProperty( "hearing_imp", "true" )
             else:
               listitem.setProperty( "hearing_imp", "false" )
+<<<<<<< HEAD
               
             self.list.append(subscounter)
             subscounter = subscounter + 1
@@ -280,15 +397,36 @@ class GUI( xbmcgui.WindowXMLDialog ):
         self.setFocusId( SUBTITLES_LIST )
         self.getControl( SUBTITLES_LIST ).selectItem( 0 )
       if self.autoDownload:    
+=======
+
+            self.list.append(subscounter)
+            subscounter = subscounter + 1
+            list_subs.append(listitem)
+        itemCount += 1
+
+      if gui:
+        label = '%i %s '"' %s '"'' % (len ( self.subtitles_list ),_( 744 ),self.file_name)
+        self.getControl( STATUS_LABEL ).setLabel( label )
+        self.getControl( SUBTITLES_LIST ).addItems( list_subs )
+        self.setFocusId( SUBTITLES_LIST )
+        self.getControl( SUBTITLES_LIST ).selectItem( 0 )
+      if self.autoDownload:
+>>>>>>> upstream/tlbb_12.3
         xbmc.executebuiltin((u"Notification(%s,%s,%i)" % (__scriptname__, _(767), 1000)).encode("utf-8"))
       return False
 
   def Download_Subtitles( self, pos, auto = False, gui = True ):
     if gui:
       if auto:
+<<<<<<< HEAD
         self.getControl( STATUS_LABEL ).setLabel(  _( 763 ) )
       else:
         self.getControl( STATUS_LABEL ).setLabel(  _( 649 ) )
+=======
+        self.getControl( STATUS_LABEL ).setLabel(  _( 763 ))
+      else:
+        self.getControl( STATUS_LABEL ).setLabel(  _( 649 ))
+>>>>>>> upstream/tlbb_12.3
     compressed_subs = os.path.join( self.tmp_sub_dir, "compressed_subs.ext")
     compressed, language, file = self.Service.download_subtitles(self.subtitles_list,
                                                              pos,
@@ -311,8 +449,13 @@ class GUI( xbmcgui.WindowXMLDialog ):
       sub_ext  = os.path.splitext( file )[1]
       if self.temp:
         sub_name = "temp_sub"
+<<<<<<< HEAD
       else:  
         sub_name = os.path.splitext( os.path.basename( self.file_original_path ) )[0]
+=======
+      else:
+        sub_name = os.path.splitext( os.path.basename( self.file_original_path ))[0]
+>>>>>>> upstream/tlbb_12.3
       if (__addon__.getSetting( "lang_to_end" ) == "true"):
         file_name = u"%s.%s%s" % ( sub_name, sub_lang, sub_ext )
       else:
@@ -336,11 +479,19 @@ class GUI( xbmcgui.WindowXMLDialog ):
         self.close()
       else:
         if gui:
+<<<<<<< HEAD
           self.getControl( STATUS_LABEL ).setLabel( _( 654 ) )
           self.show_service_list(gui)
 
   def Extract_Subtitles( self, zip_subs, subtitle_lang, gui = True ):
     xbmc.executebuiltin(('XBMC.Extract("%s","%s")' % (zip_subs,self.tmp_sub_dir,)).encode('utf-8'))
+=======
+          self.getControl( STATUS_LABEL ).setLabel( _( 654 ))
+          self.show_service_list(gui)
+
+  def Extract_Subtitles( self, zip_subs, subtitle_lang, gui = True ):
+    xbmc.executebuiltin(('XBMC.Extract("%s","%s")' % (zip_subs,self.tmp_sub_dir)).encode('utf-8'))
+>>>>>>> upstream/tlbb_12.3
     xbmc.sleep(1000)
     files = os.listdir(self.tmp_sub_dir)
     sub_filename = os.path.basename( self.file_original_path )
@@ -348,11 +499,19 @@ class GUI( xbmcgui.WindowXMLDialog ):
     subtitle_set = False
     if len(files) < 1 :
       if gui:
+<<<<<<< HEAD
         self.getControl( STATUS_LABEL ).setLabel( _( 654 ) )
         self.show_service_list(gui)
     else :
       if gui:
         self.getControl( STATUS_LABEL ).setLabel( _( 652 ) )
+=======
+        self.getControl( STATUS_LABEL ).setLabel( _( 654 ))
+        self.show_service_list(gui)
+    else :
+      if gui:
+        self.getControl( STATUS_LABEL ).setLabel( _( 652 ))
+>>>>>>> upstream/tlbb_12.3
       subtitle_set = False
       movie_sub = False
       episode = 0
@@ -365,7 +524,11 @@ class GUI( xbmcgui.WindowXMLDialog ):
           else:
             if os.path.splitext( zip_entry )[1] in exts:
               movie_sub = True
+<<<<<<< HEAD
           if ( movie_sub or int(episode) == int(self.episode) ):
+=======
+          if ( movie_sub or int(episode) == int(self.episode)):
+>>>>>>> upstream/tlbb_12.3
             if self.stack:
               try:
                 for subName in self.stackPath:
@@ -378,11 +541,19 @@ class GUI( xbmcgui.WindowXMLDialog ):
                                                     urllib.unquote(os.path.basename(subName[8:])),
                                                     subtitle_lang
                                                                )
+<<<<<<< HEAD
                     subtitle_set,file_path = copy_files( subtitle_file, file_path ) 
                 if re.split("(?x)(?i)\CD(\d)", zip_entry)[1] == "1":
                   subToActivate = file_path
               except:
                 subtitle_set = False              
+=======
+                    subtitle_set,file_path = copy_files( subtitle_file, file_path )
+                if re.split("(?x)(?i)\CD(\d)", zip_entry)[1] == "1":
+                  subToActivate = file_path
+              except:
+                subtitle_set = False
+>>>>>>> upstream/tlbb_12.3
             else:
               subtitle_set,subToActivate = copy_files( subtitle_file, file_path )
 
@@ -397,14 +568,24 @@ class GUI( xbmcgui.WindowXMLDialog ):
       self.close()
     else:
       if gui:
+<<<<<<< HEAD
         self.getControl( STATUS_LABEL ).setLabel( _( 654 ) )
+=======
+        self.getControl( STATUS_LABEL ).setLabel( _( 654 ))
+>>>>>>> upstream/tlbb_12.3
         self.show_service_list(gui)
 
   def clean_temp( self ):
     for temp_dir in [self.stream_sub_dir,self.tmp_sub_dir]:
+<<<<<<< HEAD
       rem_files(temp_dir) 
       
       
+=======
+      rem_files(temp_dir)
+
+
+>>>>>>> upstream/tlbb_12.3
   def show_service_list(self,gui):
     try:
       select_index = self.service_list.index(self.service)
@@ -414,19 +595,31 @@ class GUI( xbmcgui.WindowXMLDialog ):
       self.setFocusId( SERVICES_LIST )
       self.getControl( SERVICES_LIST ).selectItem( select_index )
 
+<<<<<<< HEAD
   def create_name(self,zip_entry,sub_filename,subtitle_lang): 
+=======
+  def create_name(self,zip_entry,sub_filename,subtitle_lang):
+>>>>>>> upstream/tlbb_12.3
     if self.temp:
       name = "temp_sub"
     else:
       name = os.path.splitext( sub_filename )[0]
     if (__addon__.getSetting( "lang_to_end" ) == "true"):
+<<<<<<< HEAD
       file_name = u"%s.%s%s" % ( name, 
+=======
+      file_name = u"%s.%s%s" % ( name,
+>>>>>>> upstream/tlbb_12.3
                                  subtitle_lang,
                                  os.path.splitext( zip_entry )[1] )
     else:
       file_name = u"%s%s" % ( name, os.path.splitext( zip_entry )[1] )
     log( __name__ ,"Sub in Archive [%s], File Name [%s]" % (zip_entry,
+<<<<<<< HEAD
                                                         file_name,))
+=======
+                                                        file_name))
+>>>>>>> upstream/tlbb_12.3
     ret_zip_entry = xbmc.validatePath(os.path.join(self.tmp_sub_dir,zip_entry)).decode("utf-8")
     ret_file_name = xbmc.validatePath(os.path.join(self.sub_folder,file_name)).decode("utf-8")
     return ret_zip_entry,ret_file_name
@@ -434,7 +627,11 @@ class GUI( xbmcgui.WindowXMLDialog ):
   def list_services( self ):
     self.list = []
     all_items = []
+<<<<<<< HEAD
     self.getControl( SERVICES_LIST ).reset() 
+=======
+    self.getControl( SERVICES_LIST ).reset()
+>>>>>>> upstream/tlbb_12.3
     for serv in self.service_list:
       listitem = xbmcgui.ListItem( serv )
       self.list.append(serv)
@@ -442,12 +639,17 @@ class GUI( xbmcgui.WindowXMLDialog ):
       all_items.append(listitem)
 
     if self.mansearch :
+<<<<<<< HEAD
         listitem = xbmcgui.ListItem( _( 612 ) )
+=======
+        listitem = xbmcgui.ListItem( _( 612 ))
+>>>>>>> upstream/tlbb_12.3
         listitem.setProperty( "man", "true" )
         self.list.append("Man")
         all_items.append(listitem)
 
     if self.parsearch :
+<<<<<<< HEAD
         listitem = xbmcgui.ListItem( _( 747 ) )
         listitem.setProperty( "man", "true" )
         self.list.append("Par")
@@ -458,6 +660,18 @@ class GUI( xbmcgui.WindowXMLDialog ):
     self.list.append("Set")
     all_items.append(listitem)
     self.getControl( SERVICES_LIST ).addItems( all_items )    
+=======
+        listitem = xbmcgui.ListItem( _( 747 ))
+        listitem.setProperty( "man", "true" )
+        self.list.append("Par")
+        all_items.append(listitem)
+
+    listitem = xbmcgui.ListItem( _( 762 ))
+    listitem.setProperty( "man", "true" )
+    self.list.append("Set")
+    all_items.append(listitem)
+    self.getControl( SERVICES_LIST ).addItems( all_items )
+>>>>>>> upstream/tlbb_12.3
 
   def keyboard(self, parent):
     dir, self.year = xbmc.getCleanMovieTitle(self.file_original_path, self.parsearch)
@@ -465,7 +679,11 @@ class GUI( xbmcgui.WindowXMLDialog ):
       if self.man_search_str != "":
         srchstr = self.man_search_str
       else:
+<<<<<<< HEAD
         srchstr = "%s (%s)" % (dir,self.year,)  
+=======
+        srchstr = "%s (%s)" % (dir,self.year)
+>>>>>>> upstream/tlbb_12.3
       kb = xbmc.Keyboard(srchstr, _( 751 ), False)
       text = self.file_name
       kb.doModal()
@@ -473,6 +691,7 @@ class GUI( xbmcgui.WindowXMLDialog ):
       self.title = text
       self.man_search_str = text
     else:
+<<<<<<< HEAD
       self.title = dir   
 
     log( __name__ ,"Manual/Keyboard Entry: Title:[%s], Year: [%s]" % (self.title, self.year,))
@@ -493,6 +712,28 @@ class GUI( xbmcgui.WindowXMLDialog ):
       selection = str(self.list[self.getControl( SERVICES_LIST ).getSelectedPosition()]) 
       self.setFocusId( 120 )
    
+=======
+      self.title = dir
+
+    log( __name__ ,"Manual/Keyboard Entry: Title:[%s], Year: [%s]" % (self.title, self.year))
+    if self.year != "" :
+      self.file_name = "%s (%s)" % (self.file_name, str(self.year))
+    else:
+      self.file_name = self.title
+    self.tvshow = ""
+    self.next = list(self.service_list)
+    self.Search_Subtitles()
+
+  def onClick( self, controlId ):
+    if controlId == SUBTITLES_LIST:
+      self.Download_Subtitles( self.getControl( SUBTITLES_LIST ).getSelectedPosition())
+
+    elif controlId == SERVICES_LIST:
+      xbmc.executebuiltin("Skin.Reset(SubtitleSourceChooserVisible)")
+      selection = str(self.list[self.getControl( SERVICES_LIST ).getSelectedPosition()])
+      self.setFocusId( 120 )
+
+>>>>>>> upstream/tlbb_12.3
       if selection == "Man":
         self.keyboard(False)
       elif selection == "Par":
@@ -500,11 +741,19 @@ class GUI( xbmcgui.WindowXMLDialog ):
       elif selection == "Set":
         __addon__.openSettings()
         self.set_allparam()
+<<<<<<< HEAD
         self.on_run()        
       else:
         self.service = selection
         self.next = list(self.service_list)
         self.Search_Subtitles()      
+=======
+        self.on_run()
+      else:
+        self.service = selection
+        self.next = list(self.service_list)
+        self.Search_Subtitles()
+>>>>>>> upstream/tlbb_12.3
 
   def onFocus( self, controlId ):
     if controlId == 150:

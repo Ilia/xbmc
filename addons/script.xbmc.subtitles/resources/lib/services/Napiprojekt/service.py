@@ -4,6 +4,10 @@ import sys
 import os
 from utilities import languageTranslate
 import xbmc
+<<<<<<< HEAD
+=======
+import xbmcvfs
+>>>>>>> upstream/tlbb_12.3
 import urllib
 
 try:
@@ -43,8 +47,13 @@ def set_filehash(path,rar):
     d = md5();    
     qpath=urllib.quote(path)
     if rar:
+<<<<<<< HEAD
         path="""rar://"""+qpath       
     d.update(open(path,"rb").read(10485760))    
+=======
+        path="""rar://"""+qpath
+    d.update(xbmcvfs.File(path,"rb").read(10485760))
+>>>>>>> upstream/tlbb_12.3
     return d
 
 def f(z):
@@ -94,4 +103,8 @@ def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, 
     language = subtitles_list[pos][ "language_name" ]
     return False, language, local_tmp_file #standard output    
 
+<<<<<<< HEAD
     
+=======
+    
+>>>>>>> upstream/tlbb_12.3

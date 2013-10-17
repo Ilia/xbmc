@@ -3918,7 +3918,7 @@ msgid "Hibernate"
 msgstr "Αδρανοποίηση"
 
 msgctxt "#13011"
-msgid "Suspend"
+msgid "PowerDown (suspend)"
 msgstr "Αναστολή"
 
 msgctxt "#13012"

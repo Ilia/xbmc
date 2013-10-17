@@ -3918,7 +3918,7 @@ msgid "Hibernate"
 msgstr "Hibernar"
 
 msgctxt "#13011"
-msgid "Suspend"
+msgid "PowerDown (suspend)"
 msgstr "Durmir"
 
 msgctxt "#13012"

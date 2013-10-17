@@ -3774,7 +3774,7 @@ msgid "Hibernate"
 msgstr "Hibernatu"
 
 msgctxt "#13011"
-msgid "Suspend"
+msgid "PowerDown (suspend)"
 msgstr "Eseki"
 
 msgctxt "#13012"

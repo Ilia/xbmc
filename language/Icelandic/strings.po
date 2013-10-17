@@ -3734,7 +3734,7 @@ msgid "Hibernate"
 msgstr "Dvali"
 
 msgctxt "#13011"
-msgid "Suspend"
+msgid "PowerDown (suspend)"
 msgstr "Svæfa"
 
 msgctxt "#13012"

@@ -4,7 +4,11 @@ import os, sys, re, xbmc, xbmcgui, string, time, urllib, urllib2
 import difflib
 from utilities import languageTranslate, log
 
+<<<<<<< HEAD
 main_url = "http://v2.subscene.com/"
+=======
+main_url = "http://subscene.com/"
+>>>>>>> upstream/tlbb_12.3
 debug_pretext = ""
 
 # Seasons as strings for searching
@@ -16,6 +20,7 @@ seasons = seasons + ["Twenty-first", "Twenty-second", "Twenty-third", "Twenty-fo
 # Regular expression patterns
 #====================================================================================================================
 
+<<<<<<< HEAD
 # subtitle pattern example:
 """
 		<tr>
@@ -51,13 +56,68 @@ subtitle_pattern = "..<tr>.{5}<td>.{6}<a class=\"a1\" href=\"/([^\n\r]{10,200}?-
 """
 movie_season_pattern = "...<a href=\"([^\n\r\t]*?/subtitles-\d{1,10}.aspx)\".{1,14}>\r\n{0,3}.{4}([^\n\r\t\&#]*?) \((\d\d\d\d)\) \r\n{0,3}.{1,4}<dfn>\((.{1,5})\)</dfn>"
 # group(1) = link, group(2) = movie_season_title,  group(3) = year
+=======
+"""
+    <td class="a1">
+                <a href="/subtitles/iron-man-3/english/772801">
+                    <div class="visited">
+                    <span class="l r neutral-icon">
+                        English
+                    </span>
+                    <span>
+                        Iron.Man.3.2013.720p.WEB-DL.H264-WEBiOS [PublicHD] 
+                    </span>
+                    </div>
+                </a>
+            </td>
+            <td class="a3">
+                1
+            </td>
+            <td class="a41">
+                &nbsp;
+            </td>
+            <td class="a5">
+
+            <a href="/u/781496">
+                Aakiful Islam
+            </a>
+            </td>
+            <td class="a6">
+                <div>
+                    Hearing Impaired. Suits all the WEB-DL Releases.&nbsp;
+                </div>
+            </td>
+"""
+
+subtitle_pattern = "<a href=\"(/subtitles/[^\"]+)\">\s+<div class=\"visited\">\s+<span class=\"[^\"]+ (\w+-icon)\">\s+([^\r\n\t]+)\s+</span>\s+\
+<span>\s+([^\r\n\t]+)\s+</span>\s+</div>\s+</a>\s+</td>\s+<td class=\"[^\"]+\">\s+[^\r\n\t]+\s+</td>\s+<td class=\"([^\"]+)\">"
+# group(1) = downloadlink, group(2) = qualitycode, group(3) = language, group(4) = filename, group(5) = hearing impaired
+
+# movie/seasonfound pattern example:
+"""
+    <div class="title">
+        <a href="/subtitles/the-big-bang-theory-fifth-season-2011">The Big Bang Theory - Fifth Season (2011)</a>
+    </div>
+    <div class="subtle">
+
+        547 subtitles
+    </div>
+
+"""
+movie_season_pattern = "<a href=\"(/subtitles/[^\"]*)\">([^<]+)\((\d{4})\)</a>\s+</div>\s+<div class=\"subtle\">\s+(\d+)"
+# group(1) = link, group(2) = movie_season_title,  group(3) = year, group(4) = num subtitles
+>>>>>>> upstream/tlbb_12.3
 
 
 
 
 # download link pattern example:
 """
+<<<<<<< HEAD
 		<a href="/subtitle/download?mac=LxawhQiaMYm9O2AsoNMHXbXDYN2b4yBreI8TJIBfpdw7UIo1JP5566Sbb2ei_zUC0" rel="nofollow" onclick="DownloadSubtitle(this)" id="downloadButton" class="button Positive">
+=======
+        <a href="/subtitle/download?mac=LxawhQiaMYm9O2AsoNMHXbXDYN2b4yBreI8TJIBfpdw7UIo1JP5566Sbb2ei_zUC0" rel="nofollow" onclick="DownloadSubtitle(this)" id="downloadButton" class="button Positive">
+>>>>>>> upstream/tlbb_12.3
 """
 downloadlink_pattern = "...<a href=\"(.+?)\" rel=\"nofollow\" onclick=\"DownloadSubtitle"
 # group(1) = link
@@ -138,16 +198,32 @@ def getallsubs(response_url, content, language, title, subtitles_list, search_st
             link = main_url + matches.group(1)
             languageshort = languageTranslate(language,0,2)
             filename   = matches.group(4)
+<<<<<<< HEAD
             hearing_imp = len(matches.group(5)) > 0
+=======
+            hearing_imp = (matches.group(5) == "a41")
+            rating = '0'
+            if matches.group(2) == "bad-icon":
+                continue
+            if matches.group(2) == "positive-icon":
+                rating = '5'
+>>>>>>> upstream/tlbb_12.3
             if search_string != "":
                 log( __name__ , "string.lower(filename) = >" + string.lower(filename) + "<" )
                 log( __name__ , "string.lower(search_string) = >" + string.lower(search_string) + "<" )
                 if string.find(string.lower(filename),string.lower(search_string)) > -1:
                     log( __name__ ,"%s Subtitles found: %s, %s" % (debug_pretext, languagefound, filename))
+<<<<<<< HEAD
                     subtitles_list.append({'rating': '0', 'movie':  title, 'filename': filename, 'sync': False, 'link': link, 'language_flag': 'flags/' + languageshort + '.gif', 'language_name': language, 'hearing_imp': hearing_imp})
             else:
                 log( __name__ ,"%s Subtitles found: %s, %s" % (debug_pretext, languagefound, filename))
                 subtitles_list.append({'rating': '0', 'movie':  title, 'filename': filename, 'sync': False, 'link': link, 'language_flag': 'flags/' + languageshort + '.gif', 'language_name': language, 'hearing_imp': hearing_imp})
+=======
+                    subtitles_list.append({'rating': rating, 'movie':  title, 'filename': filename, 'sync': False, 'link': link, 'language_flag': 'flags/' + languageshort + '.gif', 'language_name': language, 'hearing_imp': hearing_imp})
+            else:
+                log( __name__ ,"%s Subtitles found: %s, %s" % (debug_pretext, languagefound, filename))
+                subtitles_list.append({'rating': rating, 'movie':  title, 'filename': filename, 'sync': False, 'link': link, 'language_flag': 'flags/' + languageshort + '.gif', 'language_name': language, 'hearing_imp': hearing_imp})
+>>>>>>> upstream/tlbb_12.3
 
 
 def geturl(url):
@@ -176,7 +252,11 @@ def search_subtitles( file_original_path, title, tvshow, year, season, episode, 
     if len(tvshow) > 0:
         search_string = tvshow + " - " + seasons[int(season)] + " Season"
     log( __name__ ,"%s Search string = %s" % (debug_pretext, search_string))
+<<<<<<< HEAD
     url = main_url + "filmsearch.aspx?q=" + urllib.quote_plus(search_string)
+=======
+    url = main_url + "/subtitles/title.aspx?q=" + urllib.quote_plus(search_string)
+>>>>>>> upstream/tlbb_12.3
     content, response_url = geturl(url)
     if content is not None:
         if re.search("subtitles-\d{2,10}\.aspx", response_url, re.IGNORECASE):

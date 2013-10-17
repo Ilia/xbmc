@@ -252,7 +252,10 @@ call getdeploydependencies.bat
 call extract_git_rev.bat > NUL
 ECHO ------------------------------------------------------------
 SET XBMC_SETUPFILE=XBMCSetup-%GIT_REV%-%graphics%.exe
+<<<<<<< HEAD
 SET XBMC_PDBFILE=XBMCSetup-%GIT_REV%-%target%.pdb
+=======
+>>>>>>> upstream/tlbb_12.3
 ECHO Generating XBMC package installer: %XBMC_SETUPFILE%...
 
 
@@ -299,9 +302,12 @@ IF NOT EXIST "%XBMC_SETUPFILE%" (
 	  goto DIE
 )
 
+<<<<<<< HEAD
 :: pdb file needed by Jenkins
 copy %XBMC_PDB% %XBMC_PDBFILE% > nul
 
+=======
+>>>>>>> upstream/tlbb_12.3
 ECHO Done!
 ECHO Setup is located at: %CD%\%XBMC_SETUPFILE%
 ECHO ------------------------------------------------------------

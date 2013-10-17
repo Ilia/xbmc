@@ -4227,7 +4227,7 @@ msgid "Hibernate"
 msgstr ""
 
 msgctxt "#13011"
-msgid "Suspend"
+msgid "PowerDown (suspend)"
 msgstr ""
 
 msgctxt "#13012"

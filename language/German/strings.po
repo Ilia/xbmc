@@ -3918,7 +3918,7 @@ msgid "Hibernate"
 msgstr "Ruhezustand"
 
 msgctxt "#13011"
-msgid "Suspend"
+msgid "PowerDown (suspend)"
 msgstr "Bereitschaft"
 
 msgctxt "#13012"

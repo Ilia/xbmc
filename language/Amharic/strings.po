@@ -2502,7 +2502,7 @@ msgid "Hibernate"
 msgstr "ማስተኛ "
 
 msgctxt "#13011"
-msgid "Suspend"
+msgid "PowerDown (suspend)"
 msgstr "ማገጃ "
 
 msgctxt "#13012"

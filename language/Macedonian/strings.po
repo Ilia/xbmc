@@ -3886,7 +3886,7 @@ msgid "Hibernate"
 msgstr "Хибернација"
 
 msgctxt "#13011"
-msgid "Suspend"
+msgid "PowerDown (suspend)"
 msgstr "Состојба на спење"
 
 msgctxt "#13012"

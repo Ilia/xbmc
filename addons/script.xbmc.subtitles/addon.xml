@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="script.xbmc.subtitles"
        name="XBMC Subtitles"
+<<<<<<< HEAD
        version="3.9.11"
+=======
+       version="3.9.14"
+>>>>>>> upstream/tlbb_12.3
        provider-name="amet, mr_blobby">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>

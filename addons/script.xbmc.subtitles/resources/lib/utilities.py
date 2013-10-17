@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # -*- coding: utf-8 -*- 
+=======
+# -*- coding: utf-8 -*-
+>>>>>>> upstream/tlbb_12.3
 
 import os
 import re
@@ -29,9 +33,15 @@ CANCEL_DIALOG  = ( 9, 10, 13, 92, 216, 247, 257, 275, 61467, 61448, )
 SERVICE_DIR    = os.path.join(__cwd__, "resources", "lib", "services")
 
 LANGUAGES      = (
+<<<<<<< HEAD
     
     # Full Language name[0]     podnapisi[1]  ISO 639-1[2]   ISO 639-1 Code[3]   Script Setting Language[4]   localized name id number[5]
     
+=======
+
+    # Full Language name[0]     podnapisi[1]  ISO 639-1[2]   ISO 639-1 Code[3]   Script Setting Language[4]   localized name id number[5]
+
+>>>>>>> upstream/tlbb_12.3
     ("Albanian"                   , "29",       "sq",            "alb",                 "0",                     30201  ),
     ("Arabic"                     , "12",       "ar",            "ara",                 "1",                     30202  ),
     ("Belarusian"                 , "0" ,       "hy",            "arm",                 "2",                     30203  ),
@@ -95,7 +105,11 @@ LANGUAGES      = (
 
 
 REGEX_EXPRESSIONS = [ '[Ss]([0-9]+)[][._-]*[Ee]([0-9]+)([^\\\\/]*)$',
+<<<<<<< HEAD
                       '[\._ \-]([0-9]+)x([0-9]+)([^\\/]*)',                     # foo.1x09 
+=======
+                      '[\._ \-]([0-9]+)x([0-9]+)([^\\/]*)',                     # foo.1x09
+>>>>>>> upstream/tlbb_12.3
                       '[\._ \-]([0-9]+)([0-9][0-9])([\._ \-][^\\/]*)',          # foo.109
                       '([0-9]+)([0-9][0-9])([\._ \-][^\\/]*)',
                       '[\\\\/\\._ -]([0-9]+)([0-9][0-9])[^\\/]*',
@@ -115,6 +129,7 @@ class Pause:
   def restore(self):
     if self.player_state != xbmc.getCondVisibility('Player.Paused'):
       xbmc.Player().pause()
+<<<<<<< HEAD
       
   def pause(self):
     if not xbmc.getCondVisibility('Player.Paused'):
@@ -122,39 +137,73 @@ class Pause:
    
 def log(module,msg):
   xbmc.log((u"### [%s-%s] - %s" % (__scriptname__,module,msg,)).encode('utf-8'),level=xbmc.LOGDEBUG ) 
+=======
+
+  def pause(self):
+    if not xbmc.getCondVisibility('Player.Paused'):
+      xbmc.Player().pause()
+
+def log(module,msg):
+  xbmc.log((u"### [%s-%s] - %s" % (__scriptname__,module,msg,)).encode('utf-8'),level=xbmc.LOGDEBUG )
+>>>>>>> upstream/tlbb_12.3
 
 def regex_tvshow(compare, file, sub = ""):
   sub_info = ""
   tvshow = 0
+<<<<<<< HEAD
   
   for regex in REGEX_EXPRESSIONS:
     response_file = re.findall(regex, file)                  
     if len(response_file) > 0 : 
+=======
+
+  for regex in REGEX_EXPRESSIONS:
+    response_file = re.findall(regex, file)
+    if len(response_file) > 0 :
+>>>>>>> upstream/tlbb_12.3
       log( __name__ , "Regex File Se: %s, Ep: %s," % (str(response_file[0][0]),str(response_file[0][1]),) )
       tvshow = 1
       if not compare :
         title = re.split(regex, file)[0]
+<<<<<<< HEAD
         for char in ['[', ']', '_', '(', ')','.','-']: 
+=======
+        for char in ['[', ']', '_', '(', ')','.','-']:
+>>>>>>> upstream/tlbb_12.3
            title = title.replace(char, ' ')
         if title.endswith(" "): title = title[:-1]
         return title,response_file[0][0], response_file[0][1]
       else:
         break
+<<<<<<< HEAD
   
   if (tvshow == 1):
     for regex in regex_expressions:       
+=======
+
+  if (tvshow == 1):
+    for regex in regex_expressions:
+>>>>>>> upstream/tlbb_12.3
       response_sub = re.findall(regex, sub)
       if len(response_sub) > 0 :
         try :
           sub_info = "Regex Subtitle Ep: %s," % (str(response_sub[0][1]),)
           if (int(response_sub[0][1]) == int(response_file[0][1])):
             return True
+<<<<<<< HEAD
         except: pass      
+=======
+        except: pass
+>>>>>>> upstream/tlbb_12.3
     return False
   if compare :
     return True
   else:
+<<<<<<< HEAD
     return "","",""    
+=======
+    return "","",""
+>>>>>>> upstream/tlbb_12.3
 
 def languageTranslate(lang, lang_from, lang_to):
   for x in LANGUAGES:
@@ -166,11 +215,19 @@ def pause():
     xbmc.Player().pause()
     return True
   else:
+<<<<<<< HEAD
     return False  
     
 def unpause():
   if xbmc.getCondVisibility('Player.Paused'):
     xbmc.Player().pause()  
+=======
+    return False
+
+def unpause():
+  if xbmc.getCondVisibility('Player.Paused'):
+    xbmc.Player().pause()
+>>>>>>> upstream/tlbb_12.3
 
 def rem_files(directory):
   try:
@@ -178,10 +235,17 @@ def rem_files(directory):
       shutil.rmtree(directory)
   except:
     pass
+<<<<<<< HEAD
     
   if not xbmcvfs.exists(directory):
     os.makedirs(directory)
       
+=======
+
+  if not xbmcvfs.exists(directory):
+    os.makedirs(directory)
+
+>>>>>>> upstream/tlbb_12.3
 def copy_files( subtitle_file, file_path ):
   subtitle_set = False
   try:
@@ -205,6 +269,7 @@ def normalizeString(str):
 def hashFile(file_path, rar):
     if rar:
       return OpensubtitlesHashRar(file_path)
+<<<<<<< HEAD
       
     log( __name__,"Hash Standard file")  
     longlongformat = 'q'  # long long
@@ -217,6 +282,20 @@ def hashFile(file_path, rar):
     if filesize < 65536 * 2:
         return "SizeError"
     
+=======
+
+    log( __name__,"Hash Standard file")
+    longlongformat = 'q'  # long long
+    bytesize = struct.calcsize(longlongformat)
+    f = xbmcvfs.File(file_path)
+
+    filesize = f.size()
+    hash = filesize
+
+    if filesize < 65536 * 2:
+        return "SizeError"
+
+>>>>>>> upstream/tlbb_12.3
     buffer = f.read(65536)
     f.seek(max(0,filesize-65536),0)
     buffer += f.read(65536)
@@ -226,7 +305,11 @@ def hashFile(file_path, rar):
         (l_value,)= struct.unpack(longlongformat, buffer[size:size+bytesize])
         hash += l_value
         hash = hash & 0xFFFFFFFFFFFFFFFF
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> upstream/tlbb_12.3
     returnHash = "%016x" % hash
     return filesize,returnHash
 
@@ -240,11 +323,19 @@ def OpensubtitlesHashRar(firsrarfile):
     seek=0
     for i in range(4):
         f.seek(max(0,seek),0)
+<<<<<<< HEAD
         a=f.read(100)        
         type,flag,size=struct.unpack( '<BHH', a[2:2+5]) 
         if 0x74==type:
             if 0x30!=struct.unpack( '<B', a[25:25+1])[0]:
                 raise Exception('Bad compression method! Work only for "store".')            
+=======
+        a=f.read(100)
+        type,flag,size=struct.unpack( '<BHH', a[2:2+5])
+        if 0x74==type:
+            if 0x30!=struct.unpack( '<B', a[25:25+1])[0]:
+                raise Exception('Bad compression method! Work only for "store".')
+>>>>>>> upstream/tlbb_12.3
             s_partiizebodystart=seek+size
             s_partiizebody,s_unpacksize=struct.unpack( '<II', a[7:7+2*4])
             if (flag & 0x0100):
@@ -273,7 +364,11 @@ def addfilehash(name,hash,seek):
     for i in range(8192):
         hash+=struct.unpack('<q', f.read(8))[0]
         hash =hash & 0xffffffffffffffff
+<<<<<<< HEAD
     f.close()    
+=======
+    f.close()
+>>>>>>> upstream/tlbb_12.3
     return hash
 
 def hashFileMD5(file_path, buff_size=1048576):
@@ -298,7 +393,11 @@ def getShowId():
       tvdbid_query = '{"jsonrpc": "2.0", "method": "VideoLibrary.GetTVShowDetails", "params": {"tvshowid": ' + str(tvshowid) + ', "properties": ["imdbnumber"]}, "id": 1}'
       return json.loads(xbmc.executeJSONRPC (tvdbid_query))['result']['tvshowdetails']['imdbnumber']
     except:
+<<<<<<< HEAD
       log( __name__ ," Failed to find TVDBid in database")  
     
 
 
+=======
+      log( __name__ ," Failed to find TVDBid in database")
+>>>>>>> upstream/tlbb_12.3
