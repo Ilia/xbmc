@@ -22,8 +22,8 @@ import update
 
 utils.log("Update Service Starting")
 
+
 try:
-    update.checkPrevious()
     update.checkForUpdate(silent = 1)
 
 except Exception, e:

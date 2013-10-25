@@ -35,10 +35,6 @@ def getString(id):
      return ADDON.getLocalizedString(id)  
 
 
-def checkUSB():
-    return not os.path.exists('/media/usb0/.empty')
-
-
 def getUserdataPath(translate = True):
     path = ADDON.getAddonInfo('profile')
 
@@ -89,8 +85,15 @@ def setSetting(setting, value):
     xbmcaddon.Addon(id = ID).setSetting(setting, value)
 
 
+
+def saveOta():
+    f = open('/usr/share/xbmc/system/ota_version').read()
+    xbmcaddon.Addon(id = ID).setSetting('cVersion', f)
+
+
 def getSetting(setting):
     return xbmcaddon.Addon(id = ID).getSetting(setting)
+
 
 
 def deleteFile(filename, attempts = 5):

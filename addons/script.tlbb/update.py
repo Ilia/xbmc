@@ -28,12 +28,10 @@ import utils
 
 
 def checkForUpdate(silent = 1):
+    utils.saveOta()
     silent = int(silent) == 1
 
     if silent and utils.getSetting('autoUpdate') == 'false':
-        return allDone(silent)
-
-    if not utils.checkUSB():
         return allDone(silent)
 
     response = getResponse()
@@ -160,32 +158,19 @@ def reboot():
     utils.setSetting('cVersion', version)
     utils.setSetting('dVersion', '0.0.0')
 
-    cmd = 'recoveryflash \'%s\'' % getDownloadPath()
+    cmd = 'recoveryflash'
 
     utils.reboot(cmd)
 
 
 def getDownloadPath():
-    path = os.path.join(utils.getUserdataPath(), 'update.zip')
+    path = '/recovery/update.zip'
     return path
 
 
 def downloaded():
     filename = getDownloadPath()
     return os.path.exists(filename)
-
-
-def checkPrevious():
-    if not downloaded():
-        return
-
-    if not utils.checkUSB():
-        return
-
-    utils.flagUpdate()
-
-    if utils.yesno(1, 19, 20, 21):
-        reboot()
 
 
 def download(url, dest, version, dp = None, start = 0, range = 100):    
@@ -212,4 +197,4 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         checkForUpdate(sys.argv[1])
     else:
-        checkForUpgrade(1) #silent
+        checkForUpdate(1) #silent
