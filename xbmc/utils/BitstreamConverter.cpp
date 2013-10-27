@@ -456,14 +456,14 @@ bool CBitstreamConverter::Open(enum CodecID codec, uint8_t *in_extradata, int in
 
             in_extradata[4] = 0xFF;
             m_convert_3byteTo4byteNALSize = true;
-           
+
             m_extradata = (uint8_t *)m_dllAvUtil->av_malloc(in_extrasize);
             memcpy(m_extradata, in_extradata, in_extrasize);
             m_extrasize = in_extrasize;
             return true;
           }
         }
-        // valid avcC atom 
+        // valid avcC atom
         m_extradata = (uint8_t*)m_dllAvUtil->av_malloc(in_extrasize);
         memcpy(m_extradata, in_extradata, in_extrasize);
         m_extrasize = in_extrasize;
